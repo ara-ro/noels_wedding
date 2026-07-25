@@ -14,9 +14,9 @@ function getDDayLabel(dateStr: string): string {
 
 export function Calendar() {
   return (
-    <section className="border-t border-neutral-100 px-6 py-16 text-center">
-      <p className="text-sm text-neutral-400">{weddingInfo.weddingDateLabel}</p>
-      <p className="mt-2 text-2xl font-medium text-neutral-800">{getDDayLabel(weddingInfo.weddingDate)}</p>
+    <section className="border-t border-gold/30 px-6 py-16 text-center">
+      <p className="text-sm text-ink/50">{weddingInfo.weddingDateLabel}</p>
+      <p className="mt-2 text-2xl font-bold text-green">{getDDayLabel(weddingInfo.weddingDate)}</p>
     </section>
   )
 }

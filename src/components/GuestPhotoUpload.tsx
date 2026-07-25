@@ -64,7 +64,7 @@ export function GuestPhotoUpload() {
         placeholder="이름"
         value={name}
         onChange={(event) => setName(event.target.value)}
-        className="w-full rounded-lg border border-neutral-200 px-4 py-2 text-sm"
+        className="w-full rounded-lg border border-gold/40 bg-paper px-4 py-2 text-sm text-ink"
       />
       <input
         type="password"
@@ -72,24 +72,24 @@ export function GuestPhotoUpload() {
         placeholder="코드 (예식일 4자리)"
         value={code}
         onChange={(event) => setCode(event.target.value)}
-        className="w-full rounded-lg border border-neutral-200 px-4 py-2 text-sm"
+        className="w-full rounded-lg border border-gold/40 bg-paper px-4 py-2 text-sm text-ink"
       />
       <input
         type="file"
         accept="image/*"
         capture="environment"
         onChange={(event) => setFile(event.target.files?.[0] ?? null)}
-        className="w-full text-sm"
+        className="w-full text-sm text-ink/70"
       />
       {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
       <button
         type="submit"
         disabled={status === 'uploading'}
-        className="w-full rounded-lg bg-neutral-800 py-3 text-sm text-white disabled:opacity-50"
+        className="w-full rounded-lg bg-green py-3 text-sm text-paper disabled:opacity-50"
       >
         {status === 'uploading' ? '업로드 중...' : '사진 올리기'}
       </button>
-      {status === 'done' && <p className="text-center text-sm text-emerald-600">업로드 완료! 감사합니다.</p>}
+      {status === 'done' && <p className="text-center text-sm text-green">업로드 완료! 감사합니다.</p>}
     </form>
   )
 }

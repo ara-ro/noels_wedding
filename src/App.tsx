@@ -23,10 +23,10 @@ function App() {
       <Gallery />
       <AccountInfo />
 
-      <section className="border-t border-neutral-100 px-6 py-16">
-        <h2 className="mb-2 text-center text-lg font-medium text-neutral-800">하객 사진</h2>
-        <p className="mb-6 text-center text-sm text-neutral-400">결혼식에서 찍은 사진을 함께 나눠주세요.</p>
-        <Suspense fallback={<p className="text-center text-sm text-neutral-400">불러오는 중...</p>}>
+      <section className="border-t border-gold/30 px-6 py-16">
+        <h2 className="mb-2 text-center text-lg font-bold text-green">하객 사진</h2>
+        <p className="mb-6 text-center text-sm text-ink/50">결혼식에서 찍은 사진을 함께 나눠주세요.</p>
+        <Suspense fallback={<p className="text-center text-sm text-ink/40">불러오는 중...</p>}>
           <GuestPhotoUpload />
           <div className="mt-8">
             <GuestPhotoGallery />

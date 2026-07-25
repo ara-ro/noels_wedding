@@ -16,11 +16,11 @@ export function ShareKakao() {
   }
 
   return (
-    <section className="border-t border-neutral-100 px-6 py-16">
+    <section className="border-t border-gold/30 px-6 py-16">
       <button
         type="button"
         onClick={handleShare}
-        className="w-full rounded-lg bg-yellow-300 py-3 text-sm font-medium text-neutral-800"
+        className="w-full rounded-lg bg-yellow-300 py-3 text-sm font-medium text-ink"
       >
         공유하기
       </button>

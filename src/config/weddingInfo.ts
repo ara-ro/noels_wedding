@@ -26,25 +26,21 @@ export interface WeddingInfo {
   accounts: Record<AccountGroupKey, Account[]>
 }
 
-// TODO: PLAN.md 10.2 체크리스트 항목 확정되는 대로 아래 값을 실제 정보로 교체하세요.
+// 찐찐이얏.pdf(종이 청첩장) 기준 실제 정보. 계좌번호는 아직 미확정 TODO.
 export const weddingInfo: WeddingInfo = {
-  groom: { name: '신랑 이름' },
-  bride: { name: '신부 이름' },
+  groom: { name: '이율재' },
+  bride: { name: '김정은' },
   weddingDate: '2026-11-07',
-  weddingDateLabel: '2026년 11월 7일 토요일 오후 2시',
-  venueName: '예식장 이름',
-  venueAddress: '예식장 주소',
-  greeting: [
-    '두 사람이 하나가 되어',
-    '새로운 시작을 함께합니다.',
-    '귀한 걸음 하시어 축복해주시면',
-    '더없는 기쁨으로 간직하겠습니다.',
-  ],
+  weddingDateLabel: '2026년 11월 7일 토요일 오후 12시',
+  venueName: '혜화동성당',
+  venueAddress: '서울 종로구 창경궁로 288 혜화동성당',
+  greeting: ['축복의 자리에 귀한 걸음 하시어', '저희의 새로운 시작을 함께해 주세요.'],
   uploadCode: '1107',
   accounts: {
-    groom: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '신랑 이름' }],
-    bride: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '신부 이름' }],
-    groomParents: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '신랑 아버지' }],
-    brideParents: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '신부 아버지' }],
+    // TODO: 계좌번호 확정되는 대로 교체
+    groom: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '이율재' }],
+    bride: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '김정은' }],
+    groomParents: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '이강원' }],
+    brideParents: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '김태화' }],
   },
 }

@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* 실제 종이 청첩장(찐찐이얏.pdf) 톤: 아이보리 바탕 + 올리브그린 포인트 + 따뜻한 탠 컬러 */
+@theme {
+  --font-invite: 'Noto Sans KR', system-ui, sans-serif;
+  --color-paper: #f8f2e4;
+  --color-paper-dim: #f1e9d6;
+  --color-ink: #332b1f;
+  --color-green: #4a6b46;
+  --color-gold: #c9a877;
+}
+
 :root {
   color-scheme: light;
 }
@@ -11,14 +21,16 @@ body {
 }
 
 body {
-  font-family: system-ui, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-  background-color: #f5f2ee;
+  font-family: var(--font-invite);
+  background-color: var(--color-paper-dim);
+  color: var(--color-ink);
 }
 
 #root {
   max-width: 480px;
   margin: 0 auto;
   min-height: 100svh;
-  background-color: #ffffff;
+  background-color: var(--color-paper);
+  border-inline: 1px solid var(--color-gold);
   overflow-x: hidden;
 }

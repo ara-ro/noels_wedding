@@ -32,7 +32,7 @@ export function GuestPhotoGallery() {
   }, [])
 
   if (photos.length === 0) {
-    return <p className="text-center text-sm text-neutral-400">아직 업로드된 사진이 없어요. 첫 사진을 올려보세요!</p>
+    return <p className="text-center text-sm text-ink/40">아직 업로드된 사진이 없어요. 첫 사진을 올려보세요!</p>
   }
 
   return (

@@ -19,17 +19,17 @@ function AccountRow({ bank, accountNumber, holder }: Account) {
   }
 
   return (
-    <div className="flex items-center justify-between rounded-lg border border-neutral-100 px-4 py-3">
+    <div className="flex items-center justify-between rounded-lg border border-gold/30 px-4 py-3">
       <div>
-        <p className="text-sm text-neutral-800">
+        <p className="text-sm text-ink">
           {bank} {accountNumber}
         </p>
-        <p className="text-xs text-neutral-400">{holder}</p>
+        <p className="text-xs text-ink/40">{holder}</p>
       </div>
       <button
         type="button"
         onClick={handleCopy}
-        className="shrink-0 rounded-full border border-neutral-200 px-3 py-1 text-xs text-neutral-600"
+        className="shrink-0 rounded-full border border-gold/50 px-3 py-1 text-xs text-green"
       >
         {copied ? '복사됨' : '복사'}
       </button>
@@ -43,8 +43,8 @@ export function AccountInfo() {
   const visibleGroups = profile.accountOrder.filter((groupKey) => !hidden.has(groupKey))
 
   return (
-    <section className="border-t border-neutral-100 px-6 py-16">
-      <h2 className="mb-4 text-center text-lg font-medium text-neutral-800">마음 전하실 곳</h2>
+    <section className="border-t border-gold/30 px-6 py-16">
+      <h2 className="mb-4 text-center text-lg font-bold text-green">마음 전하실 곳</h2>
       <div className="space-y-6">
         {visibleGroups.map((groupKey) => {
           const accounts = weddingInfo.accounts[groupKey]
@@ -52,7 +52,7 @@ export function AccountInfo() {
 
           return (
             <div key={groupKey}>
-              <p className="mb-2 text-sm font-medium text-neutral-500">{GROUP_LABEL[groupKey]}</p>
+              <p className="mb-2 text-sm font-medium text-ink/60">{GROUP_LABEL[groupKey]}</p>
               <div className="space-y-2">
                 {accounts.map((account) => (
                   <AccountRow key={account.accountNumber} {...account} />
