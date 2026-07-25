@@ -13,7 +13,7 @@ export function Greeting() {
           <p key={line}>{line}</p>
         ))}
       </div>
-      <p className="mt-8 text-sm text-ink/50">{profile.greetingLabel}</p>
+      {profile.greetingLabel && <p className="mt-8 text-sm text-ink/50">{profile.greetingLabel}</p>}
     </section>
   )
 }

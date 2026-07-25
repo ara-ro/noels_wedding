@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { weddingInfo } from '../config/weddingInfo'
+import { downloadIcs } from '../lib/generateIcs'
 import { SectionHeading } from './SectionHeading'
 
 interface Remaining {
@@ -49,6 +50,19 @@ export function Calendar() {
         <CountdownTile value={remaining.minutes} label="MIN" />
         <CountdownTile value={remaining.seconds} label="SEC" />
       </div>
+      <button
+        type="button"
+        onClick={() =>
+          downloadIcs({
+            title: `${weddingInfo.groom.name} ♥ ${weddingInfo.bride.name} 결혼식`,
+            location: weddingInfo.venueAddress,
+            start: weddingInfo.weddingDateTime,
+          })
+        }
+        className="mt-8 rounded-full border border-gold/50 px-5 py-2 text-sm text-green"
+      >
+        캘린더에 추가하기
+      </button>
     </section>
   )
 }

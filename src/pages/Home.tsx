@@ -1,9 +1,11 @@
 import { lazy, Suspense } from 'react'
 import { MainVisual } from '../components/MainVisual'
+import { LoveQuote } from '../components/LoveQuote'
 import { Greeting } from '../components/Greeting'
 import { Family } from '../components/Family'
 import { Calendar } from '../components/Calendar'
 import { LocationMap } from '../components/LocationMap'
+import { CeremonyNotice } from '../components/CeremonyNotice'
 import { Gallery } from '../components/Gallery'
 import { AccountInfo } from '../components/AccountInfo'
 import { ShareKakao } from '../components/ShareKakao'
@@ -18,10 +20,12 @@ export function Home() {
   return (
     <>
       <MainVisual />
+      <LoveQuote />
       <Greeting />
       <Family />
       <Calendar />
       <LocationMap />
+      <CeremonyNotice />
       <Gallery />
       <AccountInfo />
 

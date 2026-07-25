@@ -10,7 +10,7 @@ function App() {
   return (
     <SenderProfileProvider>
       <NavBar current={route} />
-      {route === 'ceremony' ? <CeremonyPage /> : <Home />}
+      <div className="pt-12">{route === 'ceremony' ? <CeremonyPage /> : <Home />}</div>
     </SenderProfileProvider>
   )
 }

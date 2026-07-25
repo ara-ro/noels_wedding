@@ -35,6 +35,17 @@ export interface CeremonySection {
   items: CeremonyItem[]
 }
 
+export interface LoveQuote {
+  lines: string[]
+  source: string
+}
+
+export interface TransitInfo {
+  subway: string
+  bus: string
+  parking: string[]
+}
+
 export interface WeddingInfo {
   groom: Person
   bride: Person
@@ -45,8 +56,11 @@ export interface WeddingInfo {
   weddingDateLabel: string
   venueName: string
   venueAddress: string
-  venueMapUrl?: string
+  transitInfo: TransitInfo
+  loveQuote: LoveQuote
   greeting: string[]
+  /** 화환/식사 안내 등 예식 관련 공지 (PLAN.md 참고) */
+  ceremonyNotice: string[]
   heroPhoto: string
   galleryPhotos: string[]
   ceremonyOrder: CeremonySection[]
@@ -65,7 +79,28 @@ export const weddingInfo: WeddingInfo = {
   weddingDateLabel: '2026년 11월 7일 토요일 오후 12시',
   venueName: '혜화동성당',
   venueAddress: '서울 종로구 창경궁로 288 혜화동성당',
+  transitInfo: {
+    subway: '[4호선] 혜화역 1번 출구 도보 5분',
+    bus: '100, 102, 104, 107, 109, 140, 143, 150, 710, 272',
+    parking: [
+      '주차장: 동성중·고등학교 운동장(종로구 혜화동 90-7)',
+      '성당 내 주차는 불가합니다. 주차장에 주차 후 성당으로 이동해 주세요.',
+      '주차공간이 협소하니 가급적 대중교통 이용을 권장드립니다.',
+      '청첩장 지참 시 무료주차 2시간이 제공되며, 이후에는 주차요금이 부과됩니다.',
+    ],
+  },
+  loveQuote: {
+    lines: [
+      '사랑은 완전한 것이 되기를 기다리는 것이 아니라,',
+      '날마다 함께 배우며 자라 가는 것입니다.',
+      '서로를 있는 그대로 받아들이고,',
+      '함께 걸으며 성숙해 가는 여정입니다.',
+      '사랑은 그렇게 시간을 통하여 더욱 깊어집니다.',
+    ],
+    source: '프란치스코 前 교황 <사랑의 기쁨> 中',
+  },
   greeting: ['축복의 자리에 귀한 걸음 하시어', '저희의 새로운 시작을 함께해 주세요.'],
+  ceremonyNotice: ['화환은 쌀화환만 접수하며, 보내주신 쌀은 불우이웃돕기에 사용됩니다.'],
   heroPhoto,
   galleryPhotos: [galleryPhoto1, galleryPhoto2, galleryPhoto3, galleryPhoto4, galleryPhoto5],
   // TODO: 세부 순서(독서자·성가 등)는 성당/주례 신부님과 협의 후 확정

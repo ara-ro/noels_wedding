@@ -7,7 +7,7 @@ const TABS: { route: Route; label: string; href: string }[] = [
 
 export function NavBar({ current }: { current: Route }) {
   return (
-    <nav className="sticky top-0 z-10 flex border-b border-gold/30 bg-paper/95 backdrop-blur">
+    <nav className="fixed inset-x-0 top-0 z-10 mx-auto flex max-w-[480px] border-b border-gold/30 bg-paper/95 backdrop-blur">
       {TABS.map((tab) => {
         const isActive = tab.route === current
         return (

@@ -34,6 +34,7 @@ export function MainVisual() {
           {first.name} <span className="mx-1 text-gold">♥</span> {second.name}
         </h1>
         <p className="text-sm text-ink/50">{weddingInfo.weddingDateLabel}</p>
+        <p className="text-sm text-ink/50">{weddingInfo.venueName}</p>
       </div>
     </section>
   )
