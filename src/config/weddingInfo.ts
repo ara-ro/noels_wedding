@@ -40,8 +40,8 @@ export interface WeddingInfo {
   bride: Person
   groomFamily: FamilyInfo
   brideFamily: FamilyInfo
-  /** ISO date string, e.g. '2026-11-07' */
-  weddingDate: string
+  /** ISO datetime with timezone offset, used for the live countdown */
+  weddingDateTime: string
   weddingDateLabel: string
   venueName: string
   venueAddress: string
@@ -61,7 +61,7 @@ export const weddingInfo: WeddingInfo = {
   bride: { name: '김정은', baptismalName: '노엘라' },
   groomFamily: { father: '이강원', mother: '박승아', motherBaptismalName: '유스티나' },
   brideFamily: { father: '김태화', mother: '이회순' },
-  weddingDate: '2026-11-07',
+  weddingDateTime: '2026-11-07T12:00:00+09:00',
   weddingDateLabel: '2026년 11월 7일 토요일 오후 12시',
   venueName: '혜화동성당',
   venueAddress: '서울 종로구 창경궁로 288 혜화동성당',

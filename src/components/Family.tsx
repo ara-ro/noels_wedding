@@ -1,14 +1,17 @@
 import { weddingInfo, type FamilyInfo, type Person } from '../config/weddingInfo'
 import { useSenderProfile } from '../hooks/useSenderProfile'
+import { SectionHeading } from './SectionHeading'
 
 function FamilyRow({ family, child, childLabel }: { family: FamilyInfo; child: Person; childLabel: '아들' | '딸' }) {
   return (
     <div className="text-center">
-      <p className="text-ink">
+      <p className="text-sm text-ink/60">
         {family.father} · {family.mother}
-        {family.motherBaptismalName ? ` (${family.motherBaptismalName})` : ''} 의 {childLabel}{' '}
-        <span className="font-bold text-green">{child.name}</span>
-        {child.baptismalName ? ` (${child.baptismalName})` : ''}
+        {family.motherBaptismalName ? ` (${family.motherBaptismalName})` : ''} 의 {childLabel}
+      </p>
+      <p className="mt-1 text-lg font-bold text-green">
+        {child.name}
+        {child.baptismalName ? <span className="ml-1 text-sm font-normal text-ink/50">({child.baptismalName})</span> : null}
       </p>
     </div>
   )
@@ -22,8 +25,9 @@ export function Family() {
   const brideRow = <FamilyRow family={weddingInfo.brideFamily} child={weddingInfo.bride} childLabel="딸" />
 
   return (
-    <section className="border-t border-gold/30 px-6 py-16">
-      <div className="space-y-4">
+    <section className="px-6 py-16">
+      <SectionHeading eyebrow="FAMILY" title="가족 소개" />
+      <div className="space-y-8">
         {isGroomFirst ? (
           <>
             {groomRow}

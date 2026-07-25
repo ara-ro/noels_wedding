@@ -85,7 +85,7 @@ export function GuestPhotoUpload() {
       <button
         type="submit"
         disabled={status === 'uploading'}
-        className="w-full rounded-lg bg-green py-3 text-sm text-paper disabled:opacity-50"
+        className="w-full rounded-full bg-green py-3 text-sm text-paper disabled:opacity-50"
       >
         {status === 'uploading' ? '업로드 중...' : '사진 올리기'}
       </button>
