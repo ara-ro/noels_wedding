@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { weddingInfo, type Account, type AccountGroupKey } from '../config/weddingInfo'
 import { useSenderProfile } from '../hooks/useSenderProfile'
+import { SectionHeading } from './SectionHeading'
 
 const GROUP_LABEL: Record<AccountGroupKey, string> = {
   groom: '신랑에게',
@@ -43,8 +44,8 @@ export function AccountInfo() {
   const visibleGroups = profile.accountOrder.filter((groupKey) => !hidden.has(groupKey))
 
   return (
-    <section className="border-t border-gold/30 px-6 py-16">
-      <h2 className="mb-4 text-center text-lg font-bold text-green">마음 전하실 곳</h2>
+    <section className="px-6 py-16">
+      <SectionHeading eyebrow="ACCOUNT" title="마음 전하실 곳" />
       <div className="space-y-6">
         {visibleGroups.map((groupKey) => {
           const accounts = weddingInfo.accounts[groupKey]
@@ -52,7 +53,7 @@ export function AccountInfo() {
 
           return (
             <div key={groupKey}>
-              <p className="mb-2 text-sm font-medium text-ink/60">{GROUP_LABEL[groupKey]}</p>
+              <p className="mb-2 text-sm font-bold text-ink/60">{GROUP_LABEL[groupKey]}</p>
               <div className="space-y-2">
                 {accounts.map((account) => (
                   <AccountRow key={account.accountNumber} {...account} />

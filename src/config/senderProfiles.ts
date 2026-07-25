@@ -22,7 +22,7 @@ export const DEFAULT_PROFILE: SenderProfile = {
   key: 'default',
   fontScale: 1,
   nameOrder: ['groom', 'bride'],
-  greetingLabel: '저희 두 사람',
+  greetingLabel: '',
   accountOrder: STANDARD_ACCOUNT_ORDER,
 }
 
@@ -32,14 +32,14 @@ export const SENDER_PROFILES: Record<SenderKey, SenderProfile> = {
     key: 'groom',
     fontScale: 1,
     nameOrder: ['groom', 'bride'],
-    greetingLabel: '저희 두 사람',
+    greetingLabel: '',
     accountOrder: STANDARD_ACCOUNT_ORDER,
   },
   bride: {
     key: 'bride',
     fontScale: 1,
     nameOrder: ['bride', 'groom'],
-    greetingLabel: '저희 두 사람',
+    greetingLabel: '',
     accountOrder: STANDARD_ACCOUNT_ORDER,
   },
   'parent-groom': {
