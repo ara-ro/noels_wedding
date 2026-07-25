@@ -2,8 +2,10 @@ import { lazy, Suspense } from 'react'
 import { SenderProfileProvider } from './hooks/useSenderProfile'
 import { MainVisual } from './components/MainVisual'
 import { Greeting } from './components/Greeting'
+import { Family } from './components/Family'
 import { Calendar } from './components/Calendar'
 import { LocationMap } from './components/LocationMap'
+import { CeremonyOrder } from './components/CeremonyOrder'
 import { Gallery } from './components/Gallery'
 import { AccountInfo } from './components/AccountInfo'
 import { ShareKakao } from './components/ShareKakao'
@@ -18,8 +20,10 @@ function App() {
     <SenderProfileProvider>
       <MainVisual />
       <Greeting />
+      <Family />
       <Calendar />
       <LocationMap />
+      <CeremonyOrder />
       <Gallery />
       <AccountInfo />
 

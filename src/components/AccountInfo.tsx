@@ -52,7 +52,7 @@ export function AccountInfo() {
 
           return (
             <div key={groupKey}>
-              <p className="mb-2 text-sm font-medium text-ink/60">{GROUP_LABEL[groupKey]}</p>
+              <p className="mb-2 text-sm font-bold text-ink/60">{GROUP_LABEL[groupKey]}</p>
               <div className="space-y-2">
                 {accounts.map((account) => (
                   <AccountRow key={account.accountNumber} {...account} />

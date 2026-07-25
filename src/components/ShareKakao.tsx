@@ -20,7 +20,7 @@ export function ShareKakao() {
       <button
         type="button"
         onClick={handleShare}
-        className="w-full rounded-lg bg-yellow-300 py-3 text-sm font-medium text-ink"
+        className="w-full rounded-lg bg-yellow-300 py-3 text-sm font-bold text-ink"
       >
         공유하기
       </button>
