@@ -37,3 +37,9 @@ body {
   box-shadow: 0 0 60px rgba(32, 98, 88, 0.12);
   overflow-x: hidden;
 }
+
+/* 다음 로드맵(약도) 위젯이 자체 렌더링하는 주소/전화 정보 줄 숨김 */
+#daumRoughmapContainer1785047954283 .address,
+#daumRoughmapContainer1785047954283 .phone {
+  display: none;
+}

@@ -16,14 +16,17 @@ function FamilyRow({ family, child, childLabel }: { family: FamilyInfo; child: P
   return (
     <>
       <p>{family.father}</p>
-      <p className='mx-1'>·</p>
+      <p className=''>·</p>
       <div className="flex flex-col items-start">
         <p>{family.mother}</p>
         <p className="text-xs text-ink/40">{family.motherBaptismalName ?? ' '}</p>
       </div>
-      <p className="whitespace-nowrap text-center text-[15px] font-semibold text-green">
-        의 {childLabel}
-      </p>
+      <div>
+        <p className="">
+          의 {childLabel}
+        </p>
+      </div>
+
       <div className="flex flex-col items-center text-center">
         <p>{child.name}</p>
         <p className="text-xs text-ink/40">{child.baptismalName ?? ' '}</p>

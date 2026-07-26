@@ -1,11 +1,14 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { SectionHeading } from './SectionHeading'
 
 declare global {
   interface Window {
     daum?: {
       roughmap: {
-        Lander: new (options: { timestamp: string; key: string; mapWidth: string; mapHeight: string }) => {
+        phase: string
+        cdn: string
+        url_protocal: string
+        Lander?: new (options: { timestamp: string; key: string; mapWidth: string; mapHeight: string }) => {
           render: () => void
         }
       }
@@ -30,43 +33,78 @@ const TRANSIT_INFO = {
   ],
 }
 
-const query = encodeURIComponent(VENUE_ADDRESS)
 
-// 정확한 위경도 없이도 안전하게 동작하는 "이름/주소 검색" 기반 링크만 사용한다.
-// 좌표 기반 길찾기(카카오내비/티맵 turn-by-turn)는 잘못된 좌표를 쓰면 하객을 엉뚱한 곳으로
-// 안내할 위험이 있어, 정확한 좌표를 확보하기 전까지는 검색 결과로 연결한다.
 const MAP_LINKS = [
   { label: '네이버 지도', href: `https://naver.me/FEUOxunQ` },
-  { label: '카카오맵', href: `https://kko.to/JHSZ_7IQwP` },
-  { label: '카카오내비', href: `https://map.kakao.com/link/search/${query}` },
-  { label: '티맵', href: `tmap://search?name=${query}` },
+  { label: '카카오맵', href: `https://kko.to/JHSZ_7IQwP` }
 ]
 
 export function LocationMap() {
+  const containerRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
+    let cancelled = false
+    let lastWidth = 0
+    let resizeTimer: ReturnType<typeof setTimeout>
+    const scripts: HTMLScriptElement[] = []
+    const appendScript = (src: string, onload: () => void) => {
+      const script = document.createElement('script')
+      script.src = src
+      script.setAttribute('charset', 'UTF-8')
+      script.onload = () => {
+        if (!cancelled) onload()
+      }
+      document.body.appendChild(script)
+      scripts.push(script)
+    }
+
+    // mapWidth/mapHeight only accept pixel values, so we measure the container's own
+    // rendered width instead of hardcoding one — this is what makes the map fit its
+    // parent (mobile card widths vary from ~320px to the 460px max) rather than a fixed size.
     const renderMap = () => {
-      new window.daum!.roughmap.Lander({
+      const container = containerRef.current
+      if (!container) return
+      const width = Math.round(container.clientWidth)
+      if (!width || width === lastWidth) return
+      lastWidth = width
+      container.innerHTML = ''
+      new window.daum!.roughmap.Lander!({
         timestamp: ROUGHMAP_TIMESTAMP,
         key: ROUGHMAP_KEY,
-        mapWidth: '640',
-        mapHeight: '360',
+        mapWidth: String(width),
+        mapHeight: String(Math.round((width * 360) / 640)),
       }).render()
     }
 
-    if (window.daum?.roughmap) {
-      renderMap()
-      return
+    // roughmapLoader.js normally injects roughmapLander.js via document.write, which is a
+    // no-op for scripts inserted after the initial page load — so we load it ourselves
+    // using the cdn/phase info the loader sets on window.daum.roughmap.
+    const loadLander = () => {
+      const { url_protocal, phase, cdn } = window.daum!.roughmap
+      appendScript(`${url_protocal}//t1.kakaocdn.net/kakaomapweb/roughmap/place/${phase}/${cdn}/roughmapLander.js`, renderMap)
     }
 
-    const script = document.createElement('script')
-    script.src = 'https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js'
-    script.setAttribute('charset', 'UTF-8')
-    script.className = 'daum_roughmap_loader_script'
-    script.onload = renderMap
-    document.body.appendChild(script)
+    if (window.daum?.roughmap?.Lander) {
+      renderMap()
+    } else if (window.daum?.roughmap) {
+      loadLander()
+    } else {
+      appendScript('https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js', loadLander)
+    }
+
+    const handleResize = () => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        if (window.daum?.roughmap?.Lander) renderMap()
+      }, 200)
+    }
+    window.addEventListener('resize', handleResize)
 
     return () => {
-      document.body.removeChild(script)
+      cancelled = true
+      clearTimeout(resizeTimer)
+      window.removeEventListener('resize', handleResize)
+      scripts.forEach((script) => script.remove())
     }
   }, [])
 
@@ -76,11 +114,13 @@ export function LocationMap() {
       <p className="text-center font-serif text-lg font-semibold text-green">{VENUE_NAME}</p>
       <p className="mt-1 text-center text-sm text-ink/50">{VENUE_ADDRESS}</p>
 
-      <div className="mt-6 overflow-x-auto">
-        <div id={ROUGHMAP_CONTAINER_ID} className="root_daum_roughmap root_daum_roughmap_landing" />
-      </div>
+      <div
+        ref={containerRef}
+        id={ROUGHMAP_CONTAINER_ID}
+        className="root_daum_roughmap root_daum_roughmap_landing mt-6 w-full overflow-hidden"
+      />
 
-      <div className="mt-3 grid grid-cols-4 gap-2">
+      <div className="mt-3 grid grid-cols-2 gap-2">
         {MAP_LINKS.map((link) => (
           <a
             key={link.label}
@@ -105,13 +145,14 @@ export function LocationMap() {
         </div>
         <div>
           <p className="mb-1.5 text-[13px] font-semibold text-green">주차 안내</p>
-          <div className="space-y-1">
+          <ul className="space-y-1.5">
             {TRANSIT_INFO.parking.map((line) => (
-              <p key={line} className="text-[13px] leading-relaxed text-ink/60">
-                {line}
-              </p>
+              <li key={line} className="flex items-start gap-2 text-[13px] leading-relaxed text-ink/60">
+                <span className="mt-[7px] h-1.5 w-1.5 flex-shrink-0 rotate-45 bg-gold" />
+                <span>{line}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>
