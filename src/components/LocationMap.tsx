@@ -154,15 +154,15 @@ export function LocationMap() {
               <a href={MAP_LINKS[0].parkinghref} target="_blank" rel="noreferrer" className='inline-block w-6 h-6'>
                 <svg version="1.1" id="naver"
                   xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
-                  <polygon class="logo" fill="#1ec800" points="115.9,145.8 83.7,98.4 83.7,145.8 50,145.8 50,54.3 84.2,54.3 116.4,101.6 116.4,54.3    150,54.3 150,145.8 115.9,145.8" />
+                  xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
+                  <polygon className="logo" fill="#1ec800" points="115.9,145.8 83.7,98.4 83.7,145.8 50,145.8 50,54.3 84.2,54.3 116.4,101.6 116.4,54.3    150,54.3 150,145.8 115.9,145.8" />
                 </svg>
               </a>
               <a href={MAP_LINKS[1].parkinghref} target="_blank" rel="noreferrer" className='inline-block w-6 h-6'>
                 <svg id="kakao"
                   xmlns="http://www.w3.org/2000/svg" viewBox="-75 -90 350 350">
-                  <polygon class="kakao logo" fill="#3c1e1e" points="45 140 40 185 90 150 45 140" />
-                  <ellipse class="kakao logo" fill="#3c1e1e" cx="100" cy="80" rx="100" ry="80" />
+                  <polygon className="kakao logo" fill="#3c1e1e" points="45 140 40 185 90 150 45 140" />
+                  <ellipse className="kakao logo" fill="#3c1e1e" cx="100" cy="80" rx="100" ry="80" />
                 </svg>
               </a>
             </div>
