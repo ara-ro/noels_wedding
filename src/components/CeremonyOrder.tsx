@@ -1,5 +1,27 @@
-import { weddingInfo } from '../config/weddingInfo'
 import { SectionHeading } from './SectionHeading'
+
+const CEREMONY_ORDER = [
+  {
+    title: '시작 예식',
+    items: [{ label: '혼배 안내' }, { label: '입장식' }, { label: '인사' }, { label: '본기도' }],
+  },
+  {
+    title: '말씀 전례',
+    items: [{ label: '제1독서' }, { label: '화답송' }, { label: '복음' }, { label: '강론' }],
+  },
+  {
+    title: '혼인 예식',
+    items: [{ label: '혼인 서약' }, { label: '반지 교환' }, { label: '혼인 선언' }, { label: '신랑 신부를 위한 기도' }],
+  },
+  {
+    title: '성찬 예식',
+    items: [{ label: '예물 준비' }, { label: '감사 기도' }, { label: '주님의 기도' }, { label: '평화의 인사' }, { label: '영성체' }],
+  },
+  {
+    title: '마침 예식',
+    items: [{ label: '강복' }, { label: '파견' }],
+  },
+]
 
 export function CeremonyOrder() {
   return (
@@ -11,8 +33,8 @@ export function CeremonyOrder() {
         달라질 수 있습니다.
       </p>
       <ol className="pl-1 text-left">
-        {weddingInfo.ceremonyOrder.map((section, index) => {
-          const isLast = index === weddingInfo.ceremonyOrder.length - 1
+        {CEREMONY_ORDER.map((section, index) => {
+          const isLast = index === CEREMONY_ORDER.length - 1
           return (
             <li key={section.title} className="flex gap-4 pb-8">
               <div className="flex flex-shrink-0 flex-col items-center">

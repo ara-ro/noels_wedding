@@ -3,7 +3,8 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { db, storage } from '../lib/firebase'
 import { compressImage } from '../lib/compressImage'
-import { weddingInfo } from '../config/weddingInfo'
+
+const UPLOAD_CODE = '1107'
 
 type Status = 'idle' | 'uploading' | 'done' | 'error'
 
@@ -23,7 +24,7 @@ export function GuestPhotoUpload() {
       return
     }
     // 최종 검증은 Firebase 보안 규칙에서 이뤄짐 (PLAN.md 5.3) — 이건 사용자 피드백용 사전 체크
-    if (code !== weddingInfo.uploadCode) {
+    if (code !== UPLOAD_CODE) {
       setErrorMessage('코드가 올바르지 않습니다.')
       return
     }

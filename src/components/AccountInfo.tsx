@@ -1,7 +1,24 @@
 import { useState } from 'react'
-import { weddingInfo, type Account, type AccountGroupKey } from '../config/weddingInfo'
+import type { AccountGroupKey } from '../config/senderProfiles'
 import { useSenderProfile } from '../hooks/useSenderProfile'
 import { SectionHeading } from './SectionHeading'
+
+interface Account {
+  bank: string
+  accountNumber: string
+  holder: string
+}
+
+const GROOM_FAMILY = { father: '이강원', mother: '박승아' }
+const BRIDE_FAMILY = { father: '김태화', mother: '이회순' }
+
+// TODO: 계좌번호 확정되는 대로 교체
+const ACCOUNTS: Record<AccountGroupKey, Account[]> = {
+  groom: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '이율재' }],
+  bride: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '김정은' }],
+  groomParents: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '이강원' }],
+  brideParents: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '김태화' }],
+}
 
 type Side = 'groom' | 'bride'
 
@@ -21,12 +38,12 @@ function relationLabel(groupKey: AccountGroupKey, account: Account): string {
   if (groupKey === 'groom') return `신랑 · ${account.holder}`
   if (groupKey === 'bride') return `신부 · ${account.holder}`
   if (groupKey === 'groomParents') {
-    if (account.holder === weddingInfo.groomFamily.father) return '신랑 아버지'
-    if (account.holder === weddingInfo.groomFamily.mother) return '신랑 어머니'
+    if (account.holder === GROOM_FAMILY.father) return '신랑 아버지'
+    if (account.holder === GROOM_FAMILY.mother) return '신랑 어머니'
     return account.holder
   }
-  if (account.holder === weddingInfo.brideFamily.father) return '신부 아버지'
-  if (account.holder === weddingInfo.brideFamily.mother) return '신부 어머니'
+  if (account.holder === BRIDE_FAMILY.father) return '신부 아버지'
+  if (account.holder === BRIDE_FAMILY.mother) return '신부 어머니'
   return account.holder
 }
 
@@ -69,7 +86,7 @@ function AccountGroup({
 }) {
   const [open, setOpen] = useState(defaultOpen)
   const rows = groupKeys.flatMap((groupKey) =>
-    weddingInfo.accounts[groupKey].map((account) => ({ groupKey, account })),
+    ACCOUNTS[groupKey].map((account) => ({ groupKey, account })),
   )
   if (rows.length === 0) return null
 

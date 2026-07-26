@@ -1,5 +1,3 @@
-import { weddingInfo } from '../config/weddingInfo'
-
 export function Footer() {
   return (
     <footer className="bg-green px-9 py-16 text-center">
@@ -10,7 +8,7 @@ export function Footer() {
         진심으로 감사드립니다.
       </p>
       <p className="mt-6 font-serif text-sm tracking-wide text-gold">
-        {weddingInfo.groom.name} · {weddingInfo.bride.name}
+        이율재 · 김정은
       </p>
     </footer>
   )

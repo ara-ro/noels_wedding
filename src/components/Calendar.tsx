@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
-import { weddingInfo } from '../config/weddingInfo'
 import { downloadIcs } from '../lib/generateIcs'
+
+const WEDDING_DATE_TIME = '2026-11-07T12:00:00+09:00'
+const VENUE_ADDRESS = '서울 종로구 창경궁로 288 혜화동성당'
 
 interface Remaining {
   days: number
@@ -32,17 +34,21 @@ function CountdownTile({ value, label }: { value: number; label: string }) {
 }
 
 export function Calendar() {
-  const [remaining, setRemaining] = useState(() => getRemaining(weddingInfo.weddingDateTime))
+  const [remaining, setRemaining] = useState(() => getRemaining(WEDDING_DATE_TIME))
 
   useEffect(() => {
-    const timer = setInterval(() => setRemaining(getRemaining(weddingInfo.weddingDateTime)), 1000)
+    const timer = setInterval(() => setRemaining(getRemaining(WEDDING_DATE_TIME)), 1000)
     return () => clearInterval(timer)
   }, [])
 
   return (
     <section className="bg-paper-dim px-9 py-20 text-center">
       <p className="mb-4 text-[11px] font-medium tracking-[0.28em] text-teal">WEDDING DAY</p>
-      <p className="font-serif text-[26px] font-semibold leading-snug text-green">{weddingInfo.weddingDateLabel}</p>
+      <p className="font-serif text-[26px] font-semibold leading-snug text-green">
+        2026년 11월 7일 토요일
+        <br />
+        오후 12시
+      </p>
       <div className="mx-auto my-7 h-px w-7 bg-gold" />
       <div className="flex justify-center gap-3">
         <CountdownTile value={remaining.days} label="DAYS" />
@@ -54,9 +60,9 @@ export function Calendar() {
         type="button"
         onClick={() =>
           downloadIcs({
-            title: `${weddingInfo.groom.name} ♥ ${weddingInfo.bride.name} 결혼식`,
-            location: weddingInfo.venueAddress,
-            start: weddingInfo.weddingDateTime,
+            title: '이율재 ♥ 김정은 결혼식',
+            location: VENUE_ADDRESS,
+            start: WEDDING_DATE_TIME,
           })
         }
         className="mt-9 rounded-sm border border-green px-7 py-3 text-sm font-medium text-green"

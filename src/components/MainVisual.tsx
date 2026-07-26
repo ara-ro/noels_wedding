@@ -1,15 +1,20 @@
-import { weddingInfo } from '../config/weddingInfo'
+import heroPhoto from '../assets/photos/hero.jpg'
 import { useSenderProfile } from '../hooks/useSenderProfile'
+
+const NAMES = {
+  groom: { name: '이율재' },
+  bride: { name: '김정은' },
+}
 
 export function MainVisual() {
   const profile = useSenderProfile()
-  const [first, second] = profile.nameOrder.map((key) => weddingInfo[key])
+  const [first, second] = profile.nameOrder.map((key) => NAMES[key])
 
   return (
     <section id="hero" className="relative h-[calc(100svh-3rem)] min-h-[560px] w-full overflow-hidden">
       <img
-        src={weddingInfo.heroPhoto}
-        alt={`${weddingInfo.groom.name}, ${weddingInfo.bride.name}`}
+        src={heroPhoto}
+        alt={`${NAMES.groom.name}, ${NAMES.bride.name}`}
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-ink/15 via-ink/5 to-ink/75" />
@@ -20,9 +25,9 @@ export function MainVisual() {
         </h1>
         <div className="h-px w-7 bg-paper/55" />
         <p className="text-[15px] font-light leading-relaxed">
-          {weddingInfo.weddingDateLabel}
+          2026년 11월 7일 토요일 오후 12시
           <br />
-          {weddingInfo.venueName}
+          혜화동성당
         </p>
       </div>
     </section>

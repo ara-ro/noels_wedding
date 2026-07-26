@@ -1,6 +1,6 @@
-import type { AccountGroupKey } from './weddingInfo'
-
 export type SenderKey = 'groom' | 'bride' | 'parent-groom' | 'parent-bride' | 'family'
+
+export type AccountGroupKey = 'groom' | 'bride' | 'groomParents' | 'brideParents'
 
 export interface SenderProfile {
   key: SenderKey | 'default'
