@@ -16,6 +16,10 @@
   color-scheme: light;
 }
 
+* {
+  word-break: auto-phrase;
+}
+
 html,
 body {
   margin: 0;
