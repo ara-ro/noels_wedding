@@ -19,7 +19,11 @@ export function MainVisual() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-ink/15 via-ink/5 to-ink/75" />
       <div className="absolute inset-0 flex flex-col items-center justify-end gap-4 px-8 pb-14 text-center text-paper">
-        <p className="font-serif text-[13px] tracking-[0.32em] text-paper/85">THE WEDDING OF</p>
+        <p className="font-serif text-[13px] tracking-[0.32em] text-paper/85">
+          우리가 큰일을 할 수는 없습니다.
+          <br />
+          다만 큰 사랑으로 작은 일을 할 뿐입니다.
+        </p>
         <h1 className="font-serif text-[32px] font-semibold leading-snug">
           {first.name} <span className="mx-1">·</span> {second.name}
         </h1>

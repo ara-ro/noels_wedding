@@ -35,8 +35,8 @@ const TRANSIT_INFO = {
 
 
 const MAP_LINKS = [
-  { label: '네이버 지도', href: `https://naver.me/FEUOxunQ` },
-  { label: '카카오맵', href: `https://kko.to/JHSZ_7IQwP` }
+  { label: '네이버 지도', href: `https://naver.me/FEUOxunQ`, parkinghref: 'https://naver.me/GT4DCBjn' },
+  { label: '카카오맵', href: `https://kko.to/JHSZ_7IQwP`, parkinghref: 'https://kko.to/z8XOK2Il7h' }
 ]
 
 export function LocationMap() {
@@ -112,13 +112,15 @@ export function LocationMap() {
     <section className="bg-paper-dim px-9 py-20">
       <SectionHeading eyebrow="LOCATION" title="오시는 길" />
       <p className="text-center font-serif text-lg font-semibold text-green">{VENUE_NAME}</p>
-      <p className="mt-1 text-center text-sm text-ink/50">{VENUE_ADDRESS}</p>
-
+      <p className="mt-1 mb-2 text-center text-sm text-ink/50">{VENUE_ADDRESS}</p>
       <div
         ref={containerRef}
         id={ROUGHMAP_CONTAINER_ID}
         className="root_daum_roughmap root_daum_roughmap_landing mt-6 w-full overflow-hidden"
       />
+
+
+
 
       <div className="mt-3 grid grid-cols-2 gap-2">
         {MAP_LINKS.map((link) => (
@@ -144,7 +146,29 @@ export function LocationMap() {
           <p className="text-[13px] leading-relaxed text-ink/60">{TRANSIT_INFO.bus}</p>
         </div>
         <div>
-          <p className="mb-1.5 text-[13px] font-semibold text-green">주차 안내</p>
+          <div className='flex items-center gap-2 mb-1.5'>
+            <p className=" text-[13px] font-semibold text-green">
+              주차 안내
+            </p>
+            <div className='flex items-center'>
+              <a href={MAP_LINKS[0].parkinghref} target="_blank" rel="noreferrer" className='inline-block w-6 h-6'>
+                <svg version="1.1" id="naver"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
+                  <polygon class="logo" fill="#1ec800" points="115.9,145.8 83.7,98.4 83.7,145.8 50,145.8 50,54.3 84.2,54.3 116.4,101.6 116.4,54.3    150,54.3 150,145.8 115.9,145.8" />
+                </svg>
+              </a>
+              <a href={MAP_LINKS[1].parkinghref} target="_blank" rel="noreferrer" className='inline-block w-6 h-6'>
+                <svg id="kakao"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="-75 -90 350 350">
+                  <polygon class="kakao logo" fill="#3c1e1e" points="45 140 40 185 90 150 45 140" />
+                  <ellipse class="kakao logo" fill="#3c1e1e" cx="100" cy="80" rx="100" ry="80" />
+                </svg>
+              </a>
+            </div>
+
+          </div>
+
           <ul className="space-y-1.5">
             {TRANSIT_INFO.parking.map((line) => (
               <li key={line} className="flex items-start gap-2 text-[13px] leading-relaxed text-ink/60">

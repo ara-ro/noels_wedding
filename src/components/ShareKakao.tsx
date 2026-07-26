@@ -30,30 +30,50 @@ export function ShareKakao() {
           type="button"
           onClick={handleShare}
           aria-label="공유하기"
-          className={`pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#fee500] text-xs font-semibold text-ink shadow-lg transition-all duration-200 ${
+          className={`pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#fee500] text-ink shadow-lg transition-all duration-200 ${
             open ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
           }`}
         >
-          공유
+          <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z" />
+          </svg>
         </button>
         <button
           type="button"
           onClick={handleCopyLink}
           aria-label="링크 복사"
-          className={`pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-green bg-paper text-xs font-medium text-green shadow-lg transition-all duration-200 ${
+          className={`pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-green bg-paper text-green shadow-lg transition-all duration-200 ${
             open ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
           }`}
         >
-          {copied ? '복사됨' : '복사'}
+          {copied ? (
+            <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+              <path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+              <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" />
+            </svg>
+          )}
         </button>
         <button
           type="button"
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
           aria-label={open ? '닫기' : '더보기'}
-          className="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full bg-green text-xs font-semibold text-paper shadow-lg transition-transform active:scale-95"
+          className="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full bg-white/30 backdrop-blur text-gray-700 shadow-lg transition-transform active:scale-95"
         >
-          {open ? '닫기' : '더보기'}
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            className={`h-6 w-6 transition-transform duration-200 ${open ? 'rotate-45' : ''}`}
+          >
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
         </button>
       </div>
     </div>

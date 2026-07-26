@@ -43,3 +43,7 @@ body {
 #daumRoughmapContainer1785047954283 .phone {
   display: none;
 }
+
+#daumRoughmapContainer1785047954283 > div.cont > div{
+  display: none;
+}
