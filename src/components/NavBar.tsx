@@ -11,6 +11,11 @@ export function NavBar({ current }: { current: Route }) {
   const [isOverHero, setIsOverHero] = useState(true)
 
   useEffect(() => {
+    if (current !== 'home') {
+      setIsOverHero(false)
+      return
+    }
+
     const hero = document.getElementById('hero')
     if (!hero) return
 
@@ -21,7 +26,7 @@ export function NavBar({ current }: { current: Route }) {
     )
     observer.observe(hero)
     return () => observer.disconnect()
-  }, [])
+  }, [current])
 
   return (
     <nav
