@@ -56,7 +56,7 @@ export function Calendar() {
         <CountdownTile value={remaining.minutes} label="MIN" />
         <CountdownTile value={remaining.seconds} label="SEC" />
       </div>
-      <button
+      {/* <button
         type="button"
         onClick={() =>
           downloadIcs({
@@ -68,7 +68,7 @@ export function Calendar() {
         className="mt-9 rounded-sm border border-green px-7 py-3 text-sm font-medium text-green"
       >
         캘린더에 저장
-      </button>
+      </button> */}
     </section>
   )
 }
