@@ -36,14 +36,14 @@ export function GuestPhotoGallery() {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-2">
+    <div className="grid grid-cols-3 gap-1.5">
       {photos.map((photo) => (
         <img
           key={photo.id}
           src={photo.url}
           alt={`${photo.uploaderName}님이 올린 사진`}
           loading="lazy"
-          className="aspect-square w-full rounded object-cover"
+          className="aspect-square w-full rounded-sm object-cover"
         />
       ))}
     </div>

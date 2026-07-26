@@ -24,18 +24,18 @@ export function ShareKakao() {
   }
 
   return (
-    <section className="flex gap-2 px-6 pb-16">
+    <section className="flex gap-2 bg-paper px-9 pb-20">
       <button
         type="button"
         onClick={handleShare}
-        className="flex-1 rounded-full bg-yellow-300 py-3 text-sm font-bold text-ink"
+        className="flex-1 rounded-sm bg-[#fee500] py-3 text-sm font-medium text-ink"
       >
         공유하기
       </button>
       <button
         type="button"
         onClick={handleCopyLink}
-        className="flex-1 rounded-full border border-gold/50 py-3 text-sm font-bold text-green"
+        className="flex-1 rounded-sm border border-green py-3 text-sm font-medium text-green"
       >
         {copied ? '복사됨' : '링크 복사'}
       </button>

@@ -6,16 +6,16 @@ function FamilyRow({ family, child, childLabel }: { family: FamilyInfo; child: P
   return (
     <div className="grid grid-cols-2 gap-4">
       <div className="text-center">
-        <p className="text-ink">
+        <p className="text-sm text-ink/80">
           {family.father} · {family.mother} 의
         </p>
-        <p className="mt-1 text-xs text-ink/40">{family.motherBaptismalName ?? ' '}</p>
+        <p className="mt-1 text-xs text-ink/40">{family.motherBaptismalName ?? ' '}</p>
       </div>
       <div className="text-center">
-        <p className="text-green">
-          {childLabel} <span className="font-bold">{child.name}</span>
+        <p className="font-serif text-[15px] font-semibold text-green">
+          {childLabel} {child.name}
         </p>
-        <p className="mt-1 text-xs text-ink/40">{child.baptismalName ?? ' '}</p>
+        <p className="mt-1 text-xs text-ink/40">{child.baptismalName ?? ' '}</p>
       </div>
     </div>
   )
@@ -29,7 +29,7 @@ export function Family() {
   const brideRow = <FamilyRow family={weddingInfo.brideFamily} child={weddingInfo.bride} childLabel="딸" />
 
   return (
-    <section className="px-6 py-16">
+    <section className="bg-paper px-9 py-20">
       <SectionHeading eyebrow="FAMILY" title="가족 소개" />
       <div className="space-y-6">
         {isGroomFirst ? (

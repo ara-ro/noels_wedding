@@ -15,16 +15,16 @@ const MAP_LINKS = [
 
 export function LocationMap() {
   return (
-    <section className="px-6 py-16">
+    <section className="bg-paper-dim px-9 py-20">
       <SectionHeading eyebrow="LOCATION" title="오시는 길" />
-      <p className="text-center text-ink">{weddingInfo.venueName}</p>
-      <p className="text-center text-sm text-ink/50">{weddingInfo.venueAddress}</p>
+      <p className="text-center font-serif text-lg font-semibold text-green">{weddingInfo.venueName}</p>
+      <p className="mt-1 text-center text-sm text-ink/50">{weddingInfo.venueAddress}</p>
 
       <iframe
         title="예식장 위치"
         src={`https://maps.google.com/maps?q=${query}&output=embed`}
         loading="lazy"
-        className="mt-4 h-56 w-full rounded-lg border-0"
+        className="mt-6 h-56 w-full rounded border-0"
       />
 
       <div className="mt-3 grid grid-cols-4 gap-2">
@@ -34,25 +34,27 @@ export function LocationMap() {
             href={link.href}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full border border-gold/40 px-2 py-2 text-center text-xs text-ink/70"
+            className="rounded-sm border border-green px-2 py-2.5 text-center text-[11px] text-green"
           >
             {link.label}
           </a>
         ))}
       </div>
 
-      <div className="mt-8 space-y-3 text-sm text-ink/70">
-        <p>
-          <span className="font-bold text-green">지하철</span> {weddingInfo.transitInfo.subway}
-        </p>
-        <p>
-          <span className="font-bold text-green">버스</span> {weddingInfo.transitInfo.bus}
-        </p>
+      <div className="mt-10 flex flex-col gap-5 text-left">
         <div>
-          <span className="font-bold text-green">주차 안내</span>
-          <div className="mt-1 space-y-1">
+          <p className="mb-1.5 text-[13px] font-semibold text-green">지하철</p>
+          <p className="text-[13px] leading-relaxed text-ink/60">{weddingInfo.transitInfo.subway}</p>
+        </div>
+        <div>
+          <p className="mb-1.5 text-[13px] font-semibold text-green">버스</p>
+          <p className="text-[13px] leading-relaxed text-ink/60">{weddingInfo.transitInfo.bus}</p>
+        </div>
+        <div>
+          <p className="mb-1.5 text-[13px] font-semibold text-green">주차 안내</p>
+          <div className="space-y-1">
             {weddingInfo.transitInfo.parking.map((line) => (
-              <p key={line} className="text-ink/60">
+              <p key={line} className="text-[13px] leading-relaxed text-ink/60">
                 {line}
               </p>
             ))}

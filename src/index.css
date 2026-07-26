@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
-/* 실제 종이 청첩장(찐찐이얏.pdf) 톤: 아이보리 바탕 + 올리브그린 포인트 + 따뜻한 탠 컬러 */
+/* 성당 결혼식 청첩장 디자인 톤: 웜 베이지 바탕 + 포레스트그린/틸 포인트 + 골드 accent */
 @theme {
-  --font-invite: 'Gowun Batang', serif;
-  --color-paper: #f8f2e4;
-  --color-paper-dim: #f1e9d6;
-  --color-ink: #332b1f;
-  --color-green: #4a6b46;
-  --color-gold: #c9a877;
+  --font-sans: 'Noto Sans KR', sans-serif;
+  --font-serif: 'Noto Serif KR', serif;
+  --color-paper: #f9f8f5;
+  --color-paper-dim: #ede1d2;
+  --color-ink: #2d3a30;
+  --color-green: #355b36;
+  --color-teal: #487e70;
+  --color-gold: #cfaf85;
 }
 
 :root {
@@ -21,16 +23,17 @@ body {
 }
 
 body {
-  font-family: var(--font-invite);
+  font-family: var(--font-sans);
   background-color: var(--color-paper-dim);
   color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
 }
 
 #root {
-  max-width: 480px;
+  max-width: 460px;
   margin: 0 auto;
   min-height: 100svh;
   background-color: var(--color-paper);
-  border-inline: 1px solid var(--color-gold);
+  box-shadow: 0 0 60px rgba(32, 98, 88, 0.12);
   overflow-x: hidden;
 }
