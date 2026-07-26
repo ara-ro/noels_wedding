@@ -47,3 +47,7 @@ body {
 #daumRoughmapContainer1785047954283 > div.cont > div{
   display: none;
 }
+
+.root_daum_roughmap{
+  width: 100% !important;
+}

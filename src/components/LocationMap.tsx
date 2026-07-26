@@ -119,9 +119,6 @@ export function LocationMap() {
         className="root_daum_roughmap root_daum_roughmap_landing mt-6 w-full overflow-hidden"
       />
 
-
-
-
       <div className="mt-3 grid grid-cols-2 gap-2">
         {MAP_LINKS.map((link) => (
           <a
