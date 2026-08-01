@@ -1,23 +1,38 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import type { AccountGroupKey } from '../config/senderProfiles'
 import { useSenderProfile } from '../hooks/useSenderProfile'
 import { SectionHeading } from './SectionHeading'
 
-interface Account {
+interface AccountRowData {
+  key: string
+  label: ReactNode
   bank: string
   accountNumber: string
-  holder: string
 }
 
-const GROOM_FAMILY = { father: '이강원', mother: '박승아' }
-const BRIDE_FAMILY = { father: '김태화', mother: '이회순' }
-
 // TODO: 계좌번호 확정되는 대로 교체
-const ACCOUNTS: Record<AccountGroupKey, Account[]> = {
-  groom: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '이율재' }],
-  bride: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '김정은' }],
-  groomParents: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '이강원' }],
-  brideParents: [{ bank: '은행명', accountNumber: '000-0000-0000', holder: '김태화' }],
+// 라벨/이름은 하드코딩. 문구만 바꿀 땐 이 값들만 수정하면 됨.
+const ACCOUNTS: Record<AccountGroupKey, AccountRowData[]> = {
+  groom: [{ key: 'groom', label: '신랑 · 이율재', bank: '은행명', accountNumber: '000-0000-0000' }],
+  groomParents: [
+    { key: 'groom-father', label: '신랑 아버지 · 이강원', bank: '은행명', accountNumber: '000-0000-0000' },
+    { key: 'groom-mother', label: '신랑 어머니 · 박승아', bank: '은행명', accountNumber: '000-0000-0000' },
+  ],
+  bride: [{ key: 'bride', label: '신부 · 김정은', bank: '은행명', accountNumber: '000-0000-0000' }],
+  brideParents: [
+    {
+      key: 'bride-parents',
+      label: (
+        <>
+          신부 아버지 · 어머니
+          <br />
+          김태화 · 이회순
+        </>
+      ),
+      bank: '은행명',
+      accountNumber: '000-0000-0000',
+    },
+  ],
 }
 
 type Side = 'groom' | 'bride'
@@ -34,24 +49,11 @@ const SIDE_OF_GROUP: Record<AccountGroupKey, Side> = {
   brideParents: 'bride',
 }
 
-function relationLabel(groupKey: AccountGroupKey, account: Account): string {
-  if (groupKey === 'groom') return `신랑 · ${account.holder}`
-  if (groupKey === 'bride') return `신부 · ${account.holder}`
-  if (groupKey === 'groomParents') {
-    if (account.holder === GROOM_FAMILY.father) return '신랑 아버지'
-    if (account.holder === GROOM_FAMILY.mother) return '신랑 어머니'
-    return account.holder
-  }
-  if (account.holder === BRIDE_FAMILY.father) return '신부 아버지'
-  if (account.holder === BRIDE_FAMILY.mother) return '신부 어머니'
-  return account.holder
-}
-
-function AccountRow({ groupKey, account }: { groupKey: AccountGroupKey; account: Account }) {
+function AccountRow({ row }: { row: AccountRowData }) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(account.accountNumber)
+    await navigator.clipboard.writeText(row.accountNumber)
     setCopied(true)
     setTimeout(() => setCopied(false), 1500)
   }
@@ -59,9 +61,9 @@ function AccountRow({ groupKey, account }: { groupKey: AccountGroupKey; account:
   return (
     <div className="flex items-center justify-between gap-3 border-t border-paper-dim pt-3.5 first:border-t-0 first:pt-0">
       <div>
-        <p className="mb-0.5 text-[13px] text-ink/50">{relationLabel(groupKey, account)}</p>
+        <p className="mb-0.5 text-[13px] text-ink/50">{row.label}</p>
         <p className="text-[13px] font-medium text-ink">
-          {account.bank} {account.accountNumber}
+          {row.bank} {row.accountNumber}
         </p>
       </div>
       <button
@@ -85,9 +87,7 @@ function AccountGroup({
   defaultOpen: boolean
 }) {
   const [open, setOpen] = useState(defaultOpen)
-  const rows = groupKeys.flatMap((groupKey) =>
-    ACCOUNTS[groupKey].map((account) => ({ groupKey, account })),
-  )
+  const rows = groupKeys.flatMap((groupKey) => ACCOUNTS[groupKey])
   if (rows.length === 0) return null
 
   return (
@@ -102,8 +102,8 @@ function AccountGroup({
       </button>
       {open && (
         <div className="flex flex-col gap-3.5 px-5 pb-5">
-          {rows.map(({ groupKey, account }) => (
-            <AccountRow key={`${groupKey}-${account.accountNumber}-${account.holder}`} groupKey={groupKey} account={account} />
+          {rows.map((row) => (
+            <AccountRow key={row.key} row={row} />
           ))}
         </div>
       )}
