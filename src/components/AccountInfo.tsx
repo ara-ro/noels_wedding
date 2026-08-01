@@ -78,13 +78,11 @@ function AccountRow({ row }: { row: AccountRowData }) {
 function AccountGroup({
   side,
   groupKeys,
-  defaultOpen,
 }: {
   side: Side
   groupKeys: AccountGroupKey[]
-  defaultOpen: boolean
 }) {
-  const [open, setOpen] = useState(defaultOpen)
+  const [open, setOpen] = useState(false)
   const rows = groupKeys.flatMap((groupKey) => ACCOUNTS[groupKey])
   if (rows.length === 0) return null
 
@@ -128,8 +126,8 @@ export function AccountInfo() {
     <section className="bg-paper-dim px-9 py-20 text-center">
       <SectionHeading eyebrow={<div className="h-3 w-3 rotate-45 bg-gold" />} title="마음 전하실 곳" />
       <div className="flex flex-col gap-3 text-left">
-        {sideOrder.map((side, index) => (
-          <AccountGroup key={side} side={side} groupKeys={groupKeysBySide[side]} defaultOpen={index === 0} />
+        {sideOrder.map((side) => (
+          <AccountGroup key={side} side={side} groupKeys={groupKeysBySide[side]} />
         ))}
       </div>
     </section>
