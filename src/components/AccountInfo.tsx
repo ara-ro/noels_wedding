@@ -84,7 +84,7 @@ function AccountGroup({
   groupKeys: AccountGroupKey[]
   defaultOpen: boolean
 }) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(defaultOpen)
   const rows = groupKeys.flatMap((groupKey) => ACCOUNTS[groupKey])
   if (rows.length === 0) return null
 

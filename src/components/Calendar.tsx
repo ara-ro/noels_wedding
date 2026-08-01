@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { downloadIcs } from '../lib/generateIcs'
+// import { downloadIcs } from '../lib/generateIcs'
 
 const WEDDING_DATE_TIME = '2026-11-07T12:00:00+09:00'
 const WEDDING_DAY = '2026-11-07'
-const VENUE_ADDRESS = '서울 종로구 창경궁로 288 혜화동성당'
+// const VENUE_ADDRESS = '서울 종로구 창경궁로 288 혜화동성당'
 
 interface Remaining {
   days: number
