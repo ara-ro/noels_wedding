@@ -13,9 +13,9 @@ interface AccountRowData {
 // TODO: 계좌번호 확정되는 대로 교체
 // 라벨/이름은 하드코딩. 문구만 바꿀 땐 이 값들만 수정하면 됨.
 const ACCOUNTS: Record<AccountGroupKey, AccountRowData[]> = {
-  groom: [{ key: 'groom', label: '이율재', bank: '은행명', accountNumber: '000-0000-0000' }],
+  groom: [{ key: 'groom', label: '이율재', bank: '국민은행', accountNumber: '228002-04-147464' }],
   groomParents: [
-    { key: 'groom-father', label: '아버지 이강원', bank: '우리은행 ', accountNumber: '843-07-025225' },
+    { key: 'groom-father', label: '아버지 이강원', bank: '우리은행', accountNumber: '843-07-025225' },
     { key: 'groom-mother', label: '어머니 박승아', bank: '하나은행', accountNumber: '429-910070-38107' },
   ],
   bride: [{ key: 'bride', label: '김정은', bank: '신한은행', accountNumber: '110-628-998438' }],
@@ -27,7 +27,7 @@ const ACCOUNTS: Record<AccountGroupKey, AccountRowData[]> = {
           아버지 김태화 · 어머니 이회순
         </>
       ),
-      bank: '신한은행',
+      bank: '신한은행(이회순)',
       accountNumber: '110-058-436060',
     },
   ],
