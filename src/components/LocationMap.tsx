@@ -104,12 +104,17 @@ export function LocationMap() {
         if (window.daum?.roughmap?.Lander) renderMap()
       }, 200)
     }
-    window.addEventListener('resize', handleResize)
+    // A window 'resize' listener alone misses the common failure case: the container
+    // measures 0 width on first paint (e.g. web fonts still loading) and nothing ever
+    // fires again on mobile, where the window itself never resizes. Observing the
+    // container directly re-triggers renderMap whenever its actual size settles.
+    const resizeObserver = new ResizeObserver(handleResize)
+    if (containerRef.current) resizeObserver.observe(containerRef.current)
 
     return () => {
       cancelled = true
       clearTimeout(resizeTimer)
-      window.removeEventListener('resize', handleResize)
+      resizeObserver.disconnect()
       scripts.forEach((script) => script.remove())
     }
   }, [])
