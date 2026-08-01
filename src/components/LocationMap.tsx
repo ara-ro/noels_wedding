@@ -44,14 +44,26 @@ export function LocationMap() {
     let cancelled = false
     let lastWidth = 0
     let resizeTimer: ReturnType<typeof setTimeout>
+    const originalDocumentWrite = document.write
     const scripts: HTMLScriptElement[] = []
+    // Dynamically-appended scripts run as async scripts, and Chrome *throws* (rather than
+    // silently no-op'ing) when an async script calls document.write — this aborts the rest
+    // of that script's top-level execution. roughmapLoader.js does call document.write
+    // (to inject roughmapLander.js, which we load ourselves instead — see loadLander below),
+    // and the resulting throw was cutting the loader script off before it finished
+    // initializing the registry the widget's JSONP callback (daum.roughmap.onDataLoad)
+    // later writes into, crashing with "Cannot set properties of undefined". Neutralizing
+    // document.write for the duration of each script's execution makes it the harmless
+    // no-op the widget expects instead of a thrown error.
     const appendScript = (src: string, onload: () => void) => {
       const script = document.createElement('script')
       script.src = src
       script.setAttribute('charset', 'UTF-8')
       script.onload = () => {
+        document.write = originalDocumentWrite
         if (!cancelled) onload()
       }
+      document.write = () => {}
       document.body.appendChild(script)
       scripts.push(script)
     }
@@ -82,9 +94,9 @@ export function LocationMap() {
       }).render()
     }
 
-    // roughmapLoader.js normally injects roughmapLander.js via document.write, which is a
-    // no-op for scripts inserted after the initial page load — so we load it ourselves
-    // using the cdn/phase info the loader sets on window.daum.roughmap.
+    // roughmapLoader.js normally injects roughmapLander.js via document.write (neutralized
+    // above), so we load it ourselves using the cdn/phase info the loader sets on
+    // window.daum.roughmap.
     const loadLander = () => {
       const { url_protocal, phase, cdn } = window.daum!.roughmap
       appendScript(`${url_protocal}//t1.kakaocdn.net/kakaomapweb/roughmap/place/${phase}/${cdn}/roughmapLander.js`, renderMap)
@@ -116,6 +128,7 @@ export function LocationMap() {
       clearTimeout(resizeTimer)
       resizeObserver.disconnect()
       scripts.forEach((script) => script.remove())
+      document.write = originalDocumentWrite
     }
   }, [])
 
