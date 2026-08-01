@@ -129,11 +129,6 @@ export function AccountInfo() {
   return (
     <section className="bg-paper-dim px-9 py-20 text-center">
       <SectionHeading eyebrow="GIFT" title="마음 전하실 곳" />
-      <p className="mb-9 text-[13px] leading-relaxed text-ink/50">
-        참석이 어려우신 분들을 위해
-        <br />
-        계좌번호를 안내드립니다.
-      </p>
       <div className="flex flex-col gap-3 text-left">
         {sideOrder.map((side, index) => (
           <AccountGroup key={side} side={side} groupKeys={groupKeysBySide[side]} defaultOpen={index === 0} />
