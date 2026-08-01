@@ -13,24 +13,22 @@ interface AccountRowData {
 // TODO: 계좌번호 확정되는 대로 교체
 // 라벨/이름은 하드코딩. 문구만 바꿀 땐 이 값들만 수정하면 됨.
 const ACCOUNTS: Record<AccountGroupKey, AccountRowData[]> = {
-  groom: [{ key: 'groom', label: '신랑 · 이율재', bank: '은행명', accountNumber: '000-0000-0000' }],
+  groom: [{ key: 'groom', label: '이율재', bank: '은행명', accountNumber: '000-0000-0000' }],
   groomParents: [
-    { key: 'groom-father', label: '신랑 아버지 · 이강원', bank: '은행명', accountNumber: '000-0000-0000' },
-    { key: 'groom-mother', label: '신랑 어머니 · 박승아', bank: '은행명', accountNumber: '000-0000-0000' },
+    { key: 'groom-father', label: '아버지 이강원', bank: '우리은행 ', accountNumber: '843-07-025225' },
+    { key: 'groom-mother', label: '어머니 박승아', bank: '하나은행', accountNumber: '429-910070-38107' },
   ],
-  bride: [{ key: 'bride', label: '신부 · 김정은', bank: '은행명', accountNumber: '000-0000-0000' }],
+  bride: [{ key: 'bride', label: '김정은', bank: '신한은행', accountNumber: '110-628-998438' }],
   brideParents: [
     {
       key: 'bride-parents',
       label: (
         <>
-          신부 아버지 · 어머니
-          <br />
-          김태화 · 이회순
+          아버지 김태화 · 어머니 이회순
         </>
       ),
-      bank: '은행명',
-      accountNumber: '000-0000-0000',
+      bank: '신한은행',
+      accountNumber: '110-058-436060',
     },
   ],
 }
@@ -69,7 +67,7 @@ function AccountRow({ row }: { row: AccountRowData }) {
       <button
         type="button"
         onClick={handleCopy}
-        className="shrink-0 rounded-sm border border-gold px-3.5 py-2 text-xs text-green"
+        className="shrink-0 rounded-sm border border-gold px-3.5 py-2 text-xs text-green min-w-[70px]"
       >
         {copied ? '복사됨' : '복사'}
       </button>
@@ -86,7 +84,7 @@ function AccountGroup({
   groupKeys: AccountGroupKey[]
   defaultOpen: boolean
 }) {
-  const [open, setOpen] = useState(defaultOpen)
+  const [open, setOpen] = useState(false)
   const rows = groupKeys.flatMap((groupKey) => ACCOUNTS[groupKey])
   if (rows.length === 0) return null
 
@@ -128,7 +126,7 @@ export function AccountInfo() {
 
   return (
     <section className="bg-paper-dim px-9 py-20 text-center">
-      <SectionHeading eyebrow="GIFT" title="마음 전하실 곳" />
+      <SectionHeading eyebrow={<div className="h-3 w-3 rotate-45 bg-gold" />} title="마음 전하실 곳" />
       <div className="flex flex-col gap-3 text-left">
         {sideOrder.map((side, index) => (
           <AccountGroup key={side} side={side} groupKeys={groupKeysBySide[side]} defaultOpen={index === 0} />
