@@ -68,7 +68,7 @@ export function Calendar() {
       {isAfterWeddingDay ? (
         <p className="font-serif text-xl font-semibold text-green">축하해주셔서 감사합니다.</p>
       ) : isWeddingDay ? (
-        <p className="font-serif text-2xl font-semibold text-green">D-DAY!</p>
+        <p className="font-serif text-xl font-semibold text-green">오늘 결혼식이에요!</p>
       ) : (
         <div className="flex justify-center gap-3">
           <CountdownTile value={remaining.days} label="DAYS" />
