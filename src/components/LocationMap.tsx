@@ -16,6 +16,8 @@ declare global {
   }
 }
 
+const ROUGHMAP_CONTAINER_ID = 'daumRoughmapContainer1785047954283'
+const ROUGHMAP_TIMESTAMP = '1785047954283'
 const ROUGHMAP_KEY = 'rhivzx9xqc5'
 
 const VENUE_NAME = '혜화동성당'
@@ -44,26 +46,14 @@ export function LocationMap() {
     let cancelled = false
     let lastWidth = 0
     let resizeTimer: ReturnType<typeof setTimeout>
-    const originalDocumentWrite = document.write
     const scripts: HTMLScriptElement[] = []
-    // Dynamically-appended scripts run as async scripts, and Chrome *throws* (rather than
-    // silently no-op'ing) when an async script calls document.write — this aborts the rest
-    // of that script's top-level execution. roughmapLoader.js does call document.write
-    // (to inject roughmapLander.js, which we load ourselves instead — see loadLander below),
-    // and the resulting throw was cutting the loader script off before it finished
-    // initializing the registry the widget's JSONP callback (daum.roughmap.onDataLoad)
-    // later writes into, crashing with "Cannot set properties of undefined". Neutralizing
-    // document.write for the duration of each script's execution makes it the harmless
-    // no-op the widget expects instead of a thrown error.
     const appendScript = (src: string, onload: () => void) => {
       const script = document.createElement('script')
       script.src = src
       script.setAttribute('charset', 'UTF-8')
       script.onload = () => {
-        document.write = originalDocumentWrite
         if (!cancelled) onload()
       }
-      document.write = () => {}
       document.body.appendChild(script)
       scripts.push(script)
     }
@@ -78,25 +68,17 @@ export function LocationMap() {
       if (!width || width === lastWidth) return
       lastWidth = width
       container.innerHTML = ''
-      // Daum's Lander registers itself in a global registry keyed by `timestamp` and
-      // resolves the container via getElementById(timestamp) *asynchronously* (after a
-      // JSONP fetch). A fixed timestamp means a stale in-flight render from a previous
-      // mount (e.g. route change, or React StrictMode's mount→unmount→mount) can resolve
-      // late and append a second map into the container that's on screen now. A unique
-      // id per render call keeps every render's async completion scoped to its own call.
-      const instanceId = `${Date.now()}${Math.floor(Math.random() * 1000)}`
-      container.id = `daumRoughmapContainer${instanceId}`
       new window.daum!.roughmap.Lander!({
-        timestamp: instanceId,
+        timestamp: ROUGHMAP_TIMESTAMP,
         key: ROUGHMAP_KEY,
         mapWidth: String(width),
         mapHeight: String(Math.round((width * 360) / 640)),
       }).render()
     }
 
-    // roughmapLoader.js normally injects roughmapLander.js via document.write (neutralized
-    // above), so we load it ourselves using the cdn/phase info the loader sets on
-    // window.daum.roughmap.
+    // roughmapLoader.js normally injects roughmapLander.js via document.write, which is a
+    // no-op for scripts inserted after the initial page load — so we load it ourselves
+    // using the cdn/phase info the loader sets on window.daum.roughmap.
     const loadLander = () => {
       const { url_protocal, phase, cdn } = window.daum!.roughmap
       appendScript(`${url_protocal}//t1.kakaocdn.net/kakaomapweb/roughmap/place/${phase}/${cdn}/roughmapLander.js`, renderMap)
@@ -116,19 +98,13 @@ export function LocationMap() {
         if (window.daum?.roughmap?.Lander) renderMap()
       }, 200)
     }
-    // A window 'resize' listener alone misses the common failure case: the container
-    // measures 0 width on first paint (e.g. web fonts still loading) and nothing ever
-    // fires again on mobile, where the window itself never resizes. Observing the
-    // container directly re-triggers renderMap whenever its actual size settles.
-    const resizeObserver = new ResizeObserver(handleResize)
-    if (containerRef.current) resizeObserver.observe(containerRef.current)
+    window.addEventListener('resize', handleResize)
 
     return () => {
       cancelled = true
       clearTimeout(resizeTimer)
-      resizeObserver.disconnect()
+      window.removeEventListener('resize', handleResize)
       scripts.forEach((script) => script.remove())
-      document.write = originalDocumentWrite
     }
   }, [])
 
@@ -139,6 +115,7 @@ export function LocationMap() {
       <p className="mt-1 mb-2 text-center text-sm text-ink/50">{VENUE_ADDRESS}</p>
       <div
         ref={containerRef}
+        id={ROUGHMAP_CONTAINER_ID}
         className="root_daum_roughmap root_daum_roughmap_landing mt-6 w-full overflow-hidden"
       />
 
