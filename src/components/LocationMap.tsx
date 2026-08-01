@@ -85,7 +85,13 @@ export function LocationMap() {
     }
 
     if (window.daum?.roughmap?.Lander) {
-      renderMap()
+      // Defer so a React StrictMode dev double-invoke's cleanup can flip
+      // `cancelled` before we touch the DOM — the other branches already get
+      // this for free via script onload being async, but this fast path
+      // (Lander already loaded from a previous mount) runs synchronously.
+      Promise.resolve().then(() => {
+        if (!cancelled) renderMap()
+      })
     } else if (window.daum?.roughmap) {
       loadLander()
     } else {
