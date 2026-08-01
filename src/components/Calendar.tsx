@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { downloadIcs } from '../lib/generateIcs'
 
 const WEDDING_DATE_TIME = '2026-11-07T12:00:00+09:00'
+const WEDDING_DAY = '2026-11-07'
 const VENUE_ADDRESS = '서울 종로구 창경궁로 288 혜화동성당'
 
 interface Remaining {
@@ -22,6 +23,15 @@ function getRemaining(targetIso: string): Remaining {
   }
 }
 
+function getKoreaDateString(date: Date): string {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Seoul',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(date)
+}
+
 function CountdownTile({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center gap-2">
@@ -34,12 +44,17 @@ function CountdownTile({ value, label }: { value: number; label: string }) {
 }
 
 export function Calendar() {
-  const [remaining, setRemaining] = useState(() => getRemaining(WEDDING_DATE_TIME))
+  const [now, setNow] = useState(() => new Date())
 
   useEffect(() => {
-    const timer = setInterval(() => setRemaining(getRemaining(WEDDING_DATE_TIME)), 1000)
+    const timer = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(timer)
   }, [])
+
+  const todayKorea = getKoreaDateString(now)
+  const isWeddingDay = todayKorea === WEDDING_DAY
+  const isAfterWeddingDay = todayKorea > WEDDING_DAY
+  const remaining = getRemaining(WEDDING_DATE_TIME)
 
   return (
     <section className="bg-paper-dim px-9 py-20 text-center">
@@ -50,12 +65,18 @@ export function Calendar() {
         오후 12시
       </p>
       <div className="mx-auto my-7 h-px w-7 bg-gold" />
-      <div className="flex justify-center gap-3">
-        <CountdownTile value={remaining.days} label="DAYS" />
-        <CountdownTile value={remaining.hours} label="HOUR" />
-        <CountdownTile value={remaining.minutes} label="MIN" />
-        <CountdownTile value={remaining.seconds} label="SEC" />
-      </div>
+      {isAfterWeddingDay ? (
+        <p className="font-serif text-xl font-semibold text-green">축하해주셔서 감사합니다.</p>
+      ) : isWeddingDay ? (
+        <p className="font-serif text-2xl font-semibold text-green">D-DAY!</p>
+      ) : (
+        <div className="flex justify-center gap-3">
+          <CountdownTile value={remaining.days} label="DAYS" />
+          <CountdownTile value={remaining.hours} label="HOUR" />
+          <CountdownTile value={remaining.minutes} label="MIN" />
+          <CountdownTile value={remaining.seconds} label="SEC" />
+        </div>
+      )}
       {/* <button
         type="button"
         onClick={() =>
