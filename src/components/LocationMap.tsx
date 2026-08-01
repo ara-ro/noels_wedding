@@ -16,8 +16,6 @@ declare global {
   }
 }
 
-const ROUGHMAP_CONTAINER_ID = 'daumRoughmapContainer1785047954283'
-const ROUGHMAP_TIMESTAMP = '1785047954283'
 const ROUGHMAP_KEY = 'rhivzx9xqc5'
 
 const VENUE_NAME = '혜화동성당'
@@ -68,8 +66,16 @@ export function LocationMap() {
       if (!width || width === lastWidth) return
       lastWidth = width
       container.innerHTML = ''
+      // Daum's Lander registers itself in a global registry keyed by `timestamp` and
+      // resolves the container via getElementById(timestamp) *asynchronously* (after a
+      // JSONP fetch). A fixed timestamp means a stale in-flight render from a previous
+      // mount (e.g. route change, or React StrictMode's mount→unmount→mount) can resolve
+      // late and append a second map into the container that's on screen now. A unique
+      // id per render call keeps every render's async completion scoped to its own call.
+      const instanceId = `${Date.now()}${Math.floor(Math.random() * 1000)}`
+      container.id = `daumRoughmapContainer${instanceId}`
       new window.daum!.roughmap.Lander!({
-        timestamp: ROUGHMAP_TIMESTAMP,
+        timestamp: instanceId,
         key: ROUGHMAP_KEY,
         mapWidth: String(width),
         mapHeight: String(Math.round((width * 360) / 640)),
@@ -115,7 +121,6 @@ export function LocationMap() {
       <p className="mt-1 mb-2 text-center text-sm text-ink/50">{VENUE_ADDRESS}</p>
       <div
         ref={containerRef}
-        id={ROUGHMAP_CONTAINER_ID}
         className="root_daum_roughmap root_daum_roughmap_landing mt-6 w-full overflow-hidden"
       />
 
