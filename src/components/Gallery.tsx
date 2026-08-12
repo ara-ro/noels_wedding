@@ -119,9 +119,9 @@ export function Gallery() {
                 />
               ))}
             </div>
-            <span className="text-xs text-paper/70">
+            {/* <span className="text-xs text-paper/70">
               {openIndex + 1} / {GALLERY_PHOTOS.length}
-            </span>
+            </span> */}
           </div>
         </div>
       )}

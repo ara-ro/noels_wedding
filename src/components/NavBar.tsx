@@ -85,11 +85,9 @@ export function NavBar({ current }: { current: Route }) {
           </a>
         )
       })}
-      <div className="absolute right-0 top-full flex items-center gap-1.5 rounded-b-md bg-ink/80 px-2 py-1 text-paper backdrop-blur">
+      <button className="absolute right-0 top-full flex items-center gap-1.5 rounded-b-md bg-ink/80 px-2 py-1 text-paper backdrop-blur" onClick={toggleBgm}>
         <audio ref={audioRef} src={bgmSrc} loop />
-        <button
-          type="button"
-          onClick={toggleBgm}
+        <div
           aria-label={bgmPlaying ? '배경음악 정지' : '배경음악 재생'}
           className="flex h-4 w-4 shrink-0 items-center justify-center"
         >
@@ -103,7 +101,7 @@ export function NavBar({ current }: { current: Route }) {
               <path d="M8 5v14l11-7z" />
             </svg>
           )}
-        </button>
+        </div>
         <div className="w-24 overflow-hidden">
           <div
             className={`flex w-max whitespace-nowrap text-[10px] tracking-wide ${
@@ -114,7 +112,7 @@ export function NavBar({ current }: { current: Route }) {
             <span className="pr-8">{BGM_TITLE}</span>
           </div>
         </div>
-      </div>
+      </button>
     </nav>
   )
 }
