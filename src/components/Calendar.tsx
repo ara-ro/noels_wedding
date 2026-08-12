@@ -34,11 +34,11 @@ function getKoreaDateString(date: Date): string {
 
 function CountdownTile({ value, label }: { value: number; label: string }) {
   return (
-    <div className="flex flex-col items-center gap-2">
-      <span className="w-16 rounded bg-paper py-3 text-center font-serif text-2xl font-semibold tabular-nums text-green">
+    <div className="flex flex-col items-center gap-1">
+      <span className="text-[10px] tracking-widest text-ink/40">{label}</span>
+      <span className="w-10 h-10 flex items-center justify-center rounded bg-paper text-center font-serif text-md font-semibold tabular-nums text-green">
         {String(value).padStart(2, '0')}
       </span>
-      <span className="text-[10px] tracking-widest text-ink/40">{label}</span>
     </div>
   )
 }
@@ -59,10 +59,8 @@ export function Calendar() {
   return (
     <section className="bg-paper-dim px-9 py-20 text-center">
       <p className="mb-4 text-[11px] font-medium tracking-[0.28em] text-teal">WEDDING DAY</p>
-      <p className="font-serif text-[26px] font-semibold leading-snug text-green">
-        2026년 11월 7일 토요일
-        <br />
-        오후 12시
+      <p className="font-serif text-[18px] font-semibold leading-snug text-green">
+        2026년 11월 7일 (토) 12:00
       </p>
       <div className="mx-auto my-7 h-px w-7 bg-gold" />
       {isAfterWeddingDay ? (
@@ -70,12 +68,44 @@ export function Calendar() {
       ) : isWeddingDay ? (
         <p className="font-serif text-xl font-semibold text-green">오늘 결혼식이에요!</p>
       ) : (
-        <div className="flex justify-center gap-3">
-          <CountdownTile value={remaining.days} label="DAYS" />
-          <CountdownTile value={remaining.hours} label="HOUR" />
-          <CountdownTile value={remaining.minutes} label="MIN" />
-          <CountdownTile value={remaining.seconds} label="SEC" />
+        <div className='flex flex-col items-center gap-6'>
+          <div className="mx-auto w-full max-w-xs">
+            {/* <div className="mb-2 font-serif text-sm font-semibold text-green">2026년 11월</div> */}
+            <div className="grid grid-cols-7 gap-y-2 text-center">
+              {['일', '월', '화', '수', '목', '금', '토'].map((day) => (
+                <span key={day} className="text-[11px] font-medium text-ink/40">
+                  {day}
+                </span>
+              ))}
+              {Array.from({ length: 37 }, (_, i) => {
+                const dayNumber = i - 6
+                if (dayNumber < 1 || dayNumber > 30) {
+                  return <span key={i} />
+                }
+                const isWeddingDate = dayNumber === 7
+                return (
+                  <span
+                    key={i}
+                    className={
+                      isWeddingDate
+                        ? 'mx-auto flex h-7 w-7 items-center justify-center rounded-full bg-green font-serif text-sm font-semibold text-paper'
+                        : 'flex h-7 items-center justify-center font-serif text-sm text-green'
+                    }
+                  >
+                    {dayNumber}
+                  </span>
+                )
+              })}
+            </div>
+          </div>
+          {/* <div className="flex justify-center gap-3">
+            <CountdownTile value={remaining.days} label="DAYS" />
+            <CountdownTile value={remaining.hours} label="HOUR" />
+            <CountdownTile value={remaining.minutes} label="MIN" />
+            <CountdownTile value={remaining.seconds} label="SEC" />
+          </div> */}
         </div>
+
       )}
       {/* <button
         type="button"
