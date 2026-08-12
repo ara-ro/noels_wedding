@@ -7,7 +7,7 @@ const TABS: { route: Route; label: string; href: string }[] = [
   { route: 'ceremony', label: '예식 순서', href: '#/ceremony' },
 ]
 
-const BGM_TITLE = "noel's wedding - vol.1"
+const BGM_TITLE = "vol.1 - noel's wedding  · 이율재 신랑"
 
 export function NavBar({ current }: { current: Route }) {
   const navRef = useRef<HTMLElement>(null)
