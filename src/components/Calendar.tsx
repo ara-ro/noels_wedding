@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react'
 // import { downloadIcs } from '../lib/generateIcs'
 
-const WEDDING_DATE_TIME = '2026-11-07T12:00:00+09:00'
+// const WEDDING_DATE_TIME = '2026-11-07T12:00:00+09:00'
 const WEDDING_DAY = '2026-11-07'
 // const VENUE_ADDRESS = '서울 종로구 창경궁로 288 혜화동성당'
 
-interface Remaining {
-  days: number
-  hours: number
-  minutes: number
-  seconds: number
-}
+// interface Remaining {
+//   days: number
+//   hours: number
+//   minutes: number
+//   seconds: number
+// }
 
-function getRemaining(targetIso: string): Remaining {
-  const diffMs = Math.max(0, new Date(targetIso).getTime() - Date.now())
-  const totalSeconds = Math.floor(diffMs / 1000)
-  return {
-    days: Math.floor(totalSeconds / 86400),
-    hours: Math.floor((totalSeconds % 86400) / 3600),
-    minutes: Math.floor((totalSeconds % 3600) / 60),
-    seconds: totalSeconds % 60,
-  }
-}
+// function getRemaining(targetIso: string): Remaining {
+//   const diffMs = Math.max(0, new Date(targetIso).getTime() - Date.now())
+//   const totalSeconds = Math.floor(diffMs / 1000)
+//   return {
+//     days: Math.floor(totalSeconds / 86400),
+//     hours: Math.floor((totalSeconds % 86400) / 3600),
+//     minutes: Math.floor((totalSeconds % 3600) / 60),
+//     seconds: totalSeconds % 60,
+//   }
+// }
 
 function getKoreaDateString(date: Date): string {
   return new Intl.DateTimeFormat('en-CA', {
@@ -32,16 +32,16 @@ function getKoreaDateString(date: Date): string {
   }).format(date)
 }
 
-function CountdownTile({ value, label }: { value: number; label: string }) {
-  return (
-    <div className="flex flex-col items-center gap-1">
-      <span className="text-[10px] tracking-widest text-ink/40">{label}</span>
-      <span className="w-10 h-10 flex items-center justify-center rounded bg-paper text-center font-serif text-md font-semibold tabular-nums text-green">
-        {String(value).padStart(2, '0')}
-      </span>
-    </div>
-  )
-}
+// function CountdownTile({ value, label }: { value: number; label: string }) {
+//   return (
+//     <div className="flex flex-col items-center gap-1">
+//       <span className="text-[10px] tracking-widest text-ink/40">{label}</span>
+//       <span className="w-10 h-10 flex items-center justify-center rounded bg-paper text-center font-serif text-md font-semibold tabular-nums text-green">
+//         {String(value).padStart(2, '0')}
+//       </span>
+//     </div>
+//   )
+// }
 
 export function Calendar() {
   const [now, setNow] = useState(() => new Date())
@@ -54,7 +54,7 @@ export function Calendar() {
   const todayKorea = getKoreaDateString(now)
   const isWeddingDay = todayKorea === WEDDING_DAY
   const isAfterWeddingDay = todayKorea > WEDDING_DAY
-  const remaining = getRemaining(WEDDING_DATE_TIME)
+  // const remaining = getRemaining(WEDDING_DATE_TIME)
 
   return (
     <section className="bg-paper-dim px-9 py-20 text-center">
