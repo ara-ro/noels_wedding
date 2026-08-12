@@ -69,7 +69,7 @@ export function NavBar({ current }: { current: Route }) {
   return (
     <nav
       ref={navRef}
-      className="fixed inset-x-0 top-0 z-10 mx-auto flex max-w-[460px] backdrop-blur shadow-sm"
+      className="fixed inset-x-0 top-0 z-30 mx-auto flex max-w-[460px] backdrop-blur shadow-sm"
     >
       {TABS.map((tab) => {
         const isActive = tab.route === current
@@ -105,7 +105,11 @@ export function NavBar({ current }: { current: Route }) {
           )}
         </button>
         <div className="w-24 overflow-hidden">
-          <div className="flex w-max animate-marquee whitespace-nowrap text-[10px] tracking-wide">
+          <div
+            className={`flex w-max whitespace-nowrap text-[10px] tracking-wide ${
+              bgmPlaying ? 'animate-marquee' : ''
+            }`}
+          >
             <span className="pr-8">{BGM_TITLE}</span>
             <span className="pr-8">{BGM_TITLE}</span>
           </div>
