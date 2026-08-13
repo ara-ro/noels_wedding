@@ -74,18 +74,21 @@ export function GuestPhotoDriveGallery() {
   }
 
   return (
-    <div className="overflow-hidden">
-      <div className="flex w-max animate-photo-marquee gap-1.5">
-        {[...photos, ...photos].map((photo, index) => (
-          <img
-            key={`${photo.id}-${index}`}
-            src={`https://drive.google.com/thumbnail?id=${photo.id}&sz=w500`}
-            alt={photo.name}
-            loading="lazy"
-            className="h-28 w-28 shrink-0 rounded-sm object-cover"
-          />
-        ))}
+    <>
+      <div className="overflow-hidden">
+        <div className="flex w-max animate-photo-marquee gap-1.5">
+          {[...photos, ...photos].map((photo, index) => (
+            <img
+              key={`${photo.id}-${index}`}
+              src={`https://drive.google.com/thumbnail?id=${photo.id}&sz=w500`}
+              alt={photo.name}
+              loading="lazy"
+              className="h-28 w-28 shrink-0 rounded-sm object-cover"
+            />
+          ))}
+        </div>
       </div>
-    </div>
+      <p className="text-center text-sm text-ink/40">공유해주셔서 감사합니다!</p>
+    </>
   )
 }
