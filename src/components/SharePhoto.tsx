@@ -10,7 +10,7 @@ const GOOGLE_FORM_URL = 'https://forms.gle/iqB4PHHsvufic4mb6'
 
 export function SharePhoto() {
   return (
-    <section className="bg-paper px-9 py-20">
+    <section className="bg-white px-9 pt-20 pb-10">
         <SectionHeading eyebrow="SHARE" title="사진을 나눠주세요" />
         <p className="mb-9 text-center text-[13px] leading-relaxed text-ink/50">
           예식날 담아주신 소중한 순간을
