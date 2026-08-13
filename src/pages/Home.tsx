@@ -20,7 +20,7 @@ export function Home() {
     <>
       <MainVisual />
       {
-        today >= new Date('2026-01-07 00:00:00') ? <SharePhoto />
+        today >= new Date('2026-11-07 00:00:00') ? <SharePhoto />
         : <SharePhotoNotice />
       }
       <LoveQuote />
