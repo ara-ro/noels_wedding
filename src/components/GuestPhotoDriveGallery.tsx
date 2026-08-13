@@ -6,7 +6,10 @@ interface DriveFile {
 }
 
 const API_KEY = import.meta.env.VITE_GOOGLE_DRIVE_API_KEY
-const FOLDER_ID = import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_ID
+const FOLDER_IDS = (import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_ID ?? '')
+  .split(',')
+  .map((id) => id.trim())
+  .filter(Boolean)
 
 type Status = 'loading' | 'done' | 'unconfigured' | 'error'
 
@@ -15,15 +18,16 @@ export function GuestPhotoDriveGallery() {
   const [status, setStatus] = useState<Status>('loading')
 
   useEffect(() => {
-    if (!API_KEY || !FOLDER_ID) {
+    if (!API_KEY || FOLDER_IDS.length === 0) {
       setStatus('unconfigured')
       return
     }
 
     const fetchPhotos = async () => {
       try {
+        const parentsQuery = FOLDER_IDS.map((id) => `'${id}' in parents`).join(' or ')
         const params = new URLSearchParams({
-          q: `'${FOLDER_ID}' in parents and mimeType contains 'image/' and trashed = false`,
+          q: `(${parentsQuery}) and mimeType contains 'image/' and trashed = false`,
           key: API_KEY,
           fields: 'files(id,name)',
           orderBy: 'createdTime desc',
