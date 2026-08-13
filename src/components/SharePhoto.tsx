@@ -2,8 +2,11 @@ import { SectionHeading } from "./SectionHeading";
 import { Suspense } from "react";
 import { lazy } from "react";
 
-const GuestPhotoUpload = lazy(() => import('./GuestPhotoUpload').then((m) => ({ default: m.GuestPhotoUpload })))
-const GuestPhotoGallery = lazy(() => import('./GuestPhotoGallery').then((m) => ({ default: m.GuestPhotoGallery })))
+const GuestPhotoDriveGallery = lazy(() =>
+  import('./GuestPhotoDriveGallery').then((m) => ({ default: m.GuestPhotoDriveGallery })),
+)
+
+const GOOGLE_FORM_URL = 'https://forms.gle/iqB4PHHsvufic4mb6'
 
 export function SharePhoto() {
   return (
@@ -14,11 +17,16 @@ export function SharePhoto() {
           <br />
           신랑신부에게 전해주세요.
         </p>
+        <a
+          href={GOOGLE_FORM_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="mb-8 block w-full rounded-sm bg-green py-3 text-center text-sm font-medium text-paper"
+        >
+          사진 올리기
+        </a>
         <Suspense fallback={<p className="text-center text-sm text-ink/40">불러오는 중...</p>}>
-          <GuestPhotoUpload />
-          <div className="mt-8">
-            <GuestPhotoGallery />
-          </div>
+          <GuestPhotoDriveGallery />
         </Suspense>
       </section>
     )
