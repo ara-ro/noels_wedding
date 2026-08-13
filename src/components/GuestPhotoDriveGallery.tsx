@@ -88,7 +88,7 @@ export function GuestPhotoDriveGallery() {
           ))}
         </div>
       </div>
-      <p className="text-center text-sm text-ink/40">공유해주셔서 감사합니다!</p>
+      <p className="text-center text-sm text-ink/40 pt-2">공유해주셔서 감사합니다!</p>
     </>
   )
 }
