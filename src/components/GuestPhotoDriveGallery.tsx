@@ -14,6 +14,8 @@ const FOLDER_IDS = (import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_ID ?? '')
 
 type Status = 'loading' | 'done' | 'unconfigured' | 'error'
 
+const PAGE_SIZE = 30
+
 async function fetchFolderPhotos(folderId: string): Promise<DriveFile[]> {
   const params = new URLSearchParams({
     q: `'${folderId}' in parents and mimeType contains 'image/' and trashed = false`,
@@ -31,6 +33,7 @@ async function fetchFolderPhotos(folderId: string): Promise<DriveFile[]> {
 export function GuestPhotoDriveGallery() {
   const [photos, setPhotos] = useState<DriveFile[]>([])
   const [status, setStatus] = useState<Status>('loading')
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
   useEffect(() => {
     if (!API_KEY || FOLDER_IDS.length === 0) {
@@ -72,17 +75,30 @@ export function GuestPhotoDriveGallery() {
     return <p className="text-center text-sm text-ink/40">아직 업로드된 사진이 없어요. 첫 사진을 올려보세요!</p>
   }
 
+  const visiblePhotos = photos.slice(0, visibleCount)
+
   return (
-    <div className="grid grid-cols-3 gap-1.5">
-      {photos.map((photo) => (
-        <img
-          key={photo.id}
-          src={`https://drive.google.com/thumbnail?id=${photo.id}&sz=w500`}
-          alt={photo.name}
-          loading="lazy"
-          className="aspect-square w-full rounded-sm object-cover"
-        />
-      ))}
+    <div>
+      <div className="grid grid-cols-3 gap-1.5">
+        {visiblePhotos.map((photo) => (
+          <img
+            key={photo.id}
+            src={`https://drive.google.com/thumbnail?id=${photo.id}&sz=w500`}
+            alt={photo.name}
+            loading="lazy"
+            className="aspect-square w-full rounded-sm object-cover"
+          />
+        ))}
+      </div>
+      {visibleCount < photos.length && (
+        <button
+          type="button"
+          onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+          className="mx-auto mt-4 block rounded-sm border border-gold/50 px-6 py-2 text-sm text-ink/60"
+        >
+          사진 더보기
+        </button>
+      )}
     </div>
   )
 }
