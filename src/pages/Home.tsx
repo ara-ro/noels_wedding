@@ -10,6 +10,7 @@ import { Gallery } from '../components/Gallery'
 import { AccountInfo } from '../components/AccountInfo'
 import { ShareKakao } from '../components/ShareKakao'
 import { SharePhoto } from '../components/SharePhoto'
+import { SharePhotoNotice } from '../components/SharePhotoNotice'
 import { Footer } from '../components/Footer'
 
 
@@ -20,7 +21,8 @@ export function Home() {
       <MainVisual />
       {
         // today >= new Date('2026-11-07 12:20:00') ? <SharePhoto /> : null
-        today >= new Date('2026-07-25 12:20:00') ? <SharePhoto /> : null
+        today >= new Date('2026-07-25 12:20:00') ? <SharePhoto />
+        : <SharePhotoNotice />
       }
       <LoveQuote />
       <Greeting />
