@@ -20,8 +20,7 @@ export function Home() {
     <>
       <MainVisual />
       {
-        // today >= new Date('2026-11-07 12:20:00') ? <SharePhoto /> : null
-        today >= new Date('2026-07-25 12:20:00') ? <SharePhoto />
+        today >= new Date('2026-01-07 00:00:00') ? <SharePhoto />
         : <SharePhotoNotice />
       }
       <LoveQuote />
@@ -32,9 +31,6 @@ export function Home() {
       <LocationMap />
       <Gallery />
       <AccountInfo />
-
-      
-
       <ShareKakao />
       <Footer />
     </>
