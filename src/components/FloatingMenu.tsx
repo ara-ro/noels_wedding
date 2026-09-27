@@ -63,8 +63,8 @@ export function FloatingMenu() {
   const hintTimerRef = useRef<number | undefined>(undefined)
 
   useEffect(() => {
-    if (sessionStorage.getItem(AUTO_SHOWN_KEY)) return
-    sessionStorage.setItem(AUTO_SHOWN_KEY, '1')
+    if (localStorage.getItem(AUTO_SHOWN_KEY)) return
+    localStorage.setItem(AUTO_SHOWN_KEY, '1')
     setNoticeOpen(true)
   }, [])
 
@@ -128,8 +128,8 @@ export function FloatingMenu() {
     if (noticeClosing) return
     const reducedMotion = prefersReducedMotion()
 
-    if (!sessionStorage.getItem(HINT_SHOWN_KEY)) {
-      sessionStorage.setItem(HINT_SHOWN_KEY, '1')
+    if (!localStorage.getItem(HINT_SHOWN_KEY)) {
+      localStorage.setItem(HINT_SHOWN_KEY, '1')
       const from = closeButtonRef.current?.getBoundingClientRect()
       const to = toggleButtonRef.current?.getBoundingClientRect()
       if (!reducedMotion && from && to) {
