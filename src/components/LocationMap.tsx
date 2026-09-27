@@ -21,7 +21,7 @@ const ROUGHMAP_TIMESTAMP = '1785047954283'
 const ROUGHMAP_KEY = 'rhivzx9xqc5'
 
 const VENUE_NAME = '혜화동성당'
-const VENUE_ADDRESS = '서울 종로구 창경궁로 288 혜화동성당'
+export const VENUE_ADDRESS = '서울 종로구 창경궁로 288 혜화동성당'
 const TRANSIT_INFO = {
   subway: '[4호선] 혜화역 1번 출구 도보 5분',
   bus: '100, 102, 104, 107, 109, 140, 143, 150, 710, 272',

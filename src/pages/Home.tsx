@@ -8,7 +8,6 @@ import { LocationMap } from '../components/LocationMap'
 import { CeremonyNotice } from '../components/CeremonyNotice'
 import { Gallery } from '../components/Gallery'
 import { AccountInfo } from '../components/AccountInfo'
-import { ShareKakao } from '../components/ShareKakao'
 import { SharePhoto } from '../components/SharePhoto'
 import { SharePhotoNotice } from '../components/SharePhotoNotice'
 import { Footer } from '../components/Footer'
@@ -31,7 +30,6 @@ export function Home() {
       <LocationMap />
       <Gallery />
       <AccountInfo />
-      <ShareKakao />
       <Footer />
     </>
   )
