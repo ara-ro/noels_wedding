@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { VENUE_ADDRESS } from './LocationMap'
 
 const NOTICE_SECTIONS = [
   {
@@ -36,7 +35,6 @@ const AUTO_SHOWN_KEY = 'wedding-guest-notice-shown'
 export function FloatingMenu() {
   const [open, setOpen] = useState(false)
   const [noticeOpen, setNoticeOpen] = useState(false)
-  const [addressCopied, setAddressCopied] = useState(false)
   const [linkCopied, setLinkCopied] = useState(false)
 
   useEffect(() => {
@@ -44,12 +42,6 @@ export function FloatingMenu() {
     sessionStorage.setItem(AUTO_SHOWN_KEY, '1')
     setNoticeOpen(true)
   }, [])
-
-  const handleCopyAddress = async () => {
-    await navigator.clipboard.writeText(VENUE_ADDRESS)
-    setAddressCopied(true)
-    setTimeout(() => setAddressCopied(false), 1500)
-  }
 
   const handleCopyLink = async () => {
     await navigator.clipboard.writeText(window.location.href)
@@ -74,24 +66,6 @@ export function FloatingMenu() {
               <line x1="12" y1="10.5" x2="12" y2="16" strokeLinecap="round" />
               <circle cx="12" cy="7.5" r="1" fill="currentColor" stroke="none" />
             </svg>
-          </button>
-          <button
-            type="button"
-            onClick={handleCopyAddress}
-            aria-label="주소 복사"
-            className={`pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-green bg-paper text-green shadow-lg transition-all duration-200 ${
-              open ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
-            }`}
-          >
-            {addressCopied ? (
-              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
-                <path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
-              </svg>
-            )}
           </button>
           <button
             type="button"

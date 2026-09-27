@@ -5,10 +5,6 @@ const NAMES = {
   bride: { name: '김정은' },
 }
 
-const WEDDING_DATE_LABEL = '2026년 11월 7일 토요일'
-const WEDDING_TIME_LABEL = '오후 12시'
-const VENUE_NAME = '혜화동성당'
-
 type Turn = {
   text: string
   response?: boolean
@@ -396,14 +392,6 @@ export function CeremonyOrder() {
     <section className="bg-paper px-9 py-20 text-center">
       <p className="mb-4 text-lg text-gold">✝</p>
       <SectionHeading eyebrow="ORDER OF NUPTIAL MASS" title="혼배미사 식순" />
-      <p className="mb-1 font-serif text-base font-medium text-ink/70">
-        {NAMES.groom.name} · {NAMES.bride.name}
-      </p>
-      <p className="text-[13px] leading-relaxed text-ink/50">
-        {WEDDING_DATE_LABEL} {WEDDING_TIME_LABEL}
-        <br />
-        {VENUE_NAME}
-      </p>
       <div className="mx-auto my-8 h-px w-10 bg-gold/40" />
       <p className="mb-10 text-[13px] leading-relaxed text-ink/40">
         세부 순서는 당일 사정에 따라
