@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import galleryPhoto1 from '../assets/photos/gallery-1.jpg'
 import galleryPhoto2 from '../assets/photos/gallery-2.jpg'
 import galleryPhoto3 from '../assets/photos/gallery-3.jpg'
@@ -129,9 +130,7 @@ export function Gallery() {
             aria-label="이전 사진"
             className="absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-paper/15 text-paper"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
+            <ChevronLeft className="h-5 w-5" strokeWidth={2} />
           </button>
           <button
             type="button"
@@ -142,9 +141,7 @@ export function Gallery() {
             aria-label="다음 사진"
             className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-paper/15 text-paper"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
+            <ChevronRight className="h-5 w-5" strokeWidth={2} />
           </button>
           <button
             type="button"

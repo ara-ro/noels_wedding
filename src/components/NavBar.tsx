@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Pause, Play } from 'lucide-react'
 import type { Route } from '../hooks/useHashRoute'
 import bgmSrc from '../assets/bgm/noel_bgm.mp3'
 
@@ -92,14 +93,9 @@ export function NavBar({ current }: { current: Route }) {
           className="flex h-4 w-4 shrink-0 items-center justify-center"
         >
           {bgmPlaying ? (
-            <svg viewBox="0 0 24 24" fill="currentColor" className="h-3 w-3">
-              <rect x="6" y="5" width="4" height="14" />
-              <rect x="14" y="5" width="4" height="14" />
-            </svg>
+            <Pause className="h-3 w-3" fill="currentColor" strokeWidth={0} />
           ) : (
-            <svg viewBox="0 0 24 24" fill="currentColor" className="h-3 w-3">
-              <path d="M8 5v14l11-7z" />
-            </svg>
+            <Play className="h-3 w-3" fill="currentColor" strokeWidth={0} />
           )}
         </div>
         <div className="w-24 overflow-hidden">
