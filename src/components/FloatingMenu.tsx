@@ -15,7 +15,7 @@ const NOTICE_SECTIONS = [
   },
   {
     title: '식사 장소',
-    lines: ['식사는 본당 옆 소화교육관에서 진행됩니다.'],
+    lines: ['식사는 본당 옆 소화교육관 건물에서 진행됩니다.', '건물 1층과 2층에서 식사가 가능합니다.'],
   },
   {
     title: '신부대기실',
@@ -25,7 +25,7 @@ const NOTICE_SECTIONS = [
     title: '미사 시간',
     lines: [
       '혼배미사는 약 1시간 정도 소요될 예정입니다.',
-      '식사를 먼저 하셔도 괜찮으니, 편하신 순서로 참석해 주세요.',
+      '식사를 먼저 하셔도 됩니다. 편하신 순서로 참석해 주세요.',
     ],
   },
 ]
@@ -37,7 +37,7 @@ const HINT_SHOWN_KEY = 'wedding-guest-notice-hint-shown'
 
 const SHEET_EXIT_MS = 250
 const FLIGHT_MS = 700
-const HINT_VISIBLE_MS = 2200
+const HINT_VISIBLE_MS = 1000
 
 type Point = { x: number; y: number }
 
