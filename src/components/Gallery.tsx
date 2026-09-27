@@ -4,9 +4,55 @@ import galleryPhoto2 from '../assets/photos/gallery-2.jpg'
 import galleryPhoto3 from '../assets/photos/gallery-3.jpg'
 import galleryPhoto4 from '../assets/photos/gallery-4.jpg'
 import galleryPhoto5 from '../assets/photos/gallery-5.jpg'
+import galleryPhoto6 from '../assets/photos/gallery-6.webp'
+import galleryPhoto7 from '../assets/photos/gallery-7.webp'
+import galleryPhoto8 from '../assets/photos/gallery-8.webp'
+import galleryPhoto9 from '../assets/photos/gallery-9.webp'
+import galleryPhoto10 from '../assets/photos/gallery-10.webp'
+import galleryPhoto11 from '../assets/photos/gallery-11.webp'
+import galleryPhoto12 from '../assets/photos/gallery-12.webp'
+import galleryPhoto13 from '../assets/photos/gallery-13.webp'
+import galleryPhoto14 from '../assets/photos/gallery-14.webp'
+import galleryPhoto15 from '../assets/photos/gallery-15.webp'
+import galleryPhoto16 from '../assets/photos/gallery-16.webp'
+import galleryPhoto17 from '../assets/photos/gallery-17.webp'
+import galleryPhoto18 from '../assets/photos/gallery-18.webp'
+import galleryPhoto19 from '../assets/photos/gallery-19.webp'
+import galleryPhoto20 from '../assets/photos/gallery-20.webp'
+import galleryPhoto21 from '../assets/photos/gallery-21.webp'
+import galleryPhoto22 from '../assets/photos/gallery-22.webp'
+import galleryPhoto23 from '../assets/photos/gallery-23.webp'
+import galleryPhoto24 from '../assets/photos/gallery-24.webp'
+import galleryPhoto25 from '../assets/photos/gallery-25.webp'
 import { SectionHeading } from './SectionHeading'
 
-const GALLERY_PHOTOS = [galleryPhoto1, galleryPhoto2, galleryPhoto3, galleryPhoto4, galleryPhoto5]
+const GALLERY_PHOTOS = [
+  galleryPhoto1,
+  galleryPhoto2,
+  galleryPhoto3,
+  galleryPhoto4,
+  galleryPhoto5,
+  galleryPhoto6,
+  galleryPhoto7,
+  galleryPhoto8,
+  galleryPhoto9,
+  galleryPhoto10,
+  galleryPhoto11,
+  galleryPhoto12,
+  galleryPhoto13,
+  galleryPhoto14,
+  galleryPhoto15,
+  galleryPhoto16,
+  galleryPhoto17,
+  galleryPhoto18,
+  galleryPhoto19,
+  galleryPhoto20,
+  galleryPhoto21,
+  galleryPhoto22,
+  galleryPhoto23,
+  galleryPhoto24,
+  galleryPhoto25,
+]
 const SWIPE_THRESHOLD = 50
 
 export function Gallery() {
