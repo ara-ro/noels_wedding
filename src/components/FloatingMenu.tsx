@@ -5,7 +5,7 @@ const NOTICE_SECTIONS = [
   {
     title: '주차',
     lines: [
-      '주차는 동성중·고등학교 운동장에서 가능하나, 최대 50대까지만 가능해 공간이 협소합니다. 대중교통(지하철) 이용을 권장드립니다.',
+      '주차는 동성중·고등학교 운동장에서 가능하나, <b class="text-red-500">최대 50대까지만</b> 가능해 공간이 협소합니다. 대중교통(지하철) 이용을 권장드립니다.',
       '청첩장을 지참하시면 무료주차 2시간이 제공되며, 이후에는 주차요금이 부과됩니다.',
     ],
   },
@@ -123,7 +123,7 @@ export function FloatingMenu() {
                     {section.lines.map((line) => (
                       <li key={line} className="flex items-start gap-2 text-[13px] leading-relaxed text-ink/60">
                         <span className="mt-[7px] h-1.5 w-1.5 flex-shrink-0 rotate-45 bg-gold" />
-                        <span>{line}</span>
+                        <span dangerouslySetInnerHTML={{ __html: line }} />
                       </li>
                     ))}
                   </ul>
