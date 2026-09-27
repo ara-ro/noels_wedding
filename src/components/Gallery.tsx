@@ -91,13 +91,16 @@ export function Gallery() {
   return (
     <section className="bg-paper px-9 py-20 text-center">
       <SectionHeading eyebrow="GALLERY" title="우리의 순간들" />
-      <div className="grid grid-cols-3 gap-1.5">
+      <div
+        className="grid grid-flow-col gap-1.5 overflow-x-auto snap-x snap-mandatory pb-1"
+        style={{ gridTemplateRows: 'repeat(3, auto)', gridAutoColumns: 'calc((100% - 0.75rem) / 3)' }}
+      >
         {GALLERY_PHOTOS.map((photo, index) => (
           <button
             key={photo}
             type="button"
             onClick={() => setOpenIndex(index)}
-            className="aspect-square w-full overflow-hidden"
+            className="aspect-square w-full snap-start overflow-hidden"
           >
             <img src={photo} alt={`웨딩 사진 ${index + 1}`} loading="lazy" className="h-full w-full object-cover" />
           </button>
